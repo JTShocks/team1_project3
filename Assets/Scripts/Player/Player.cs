@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class Player : MonoBehaviour
     // Need to get ref to the CharacterController
 
     CharacterController playerController;
+
+    Vector3 movementDirection;
+    Vector2 inputDirection;
+    public float playerMoveSpeed = 8f;
 
     // What does the player need to be able to do?
     //1. Move around
@@ -23,6 +28,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movementDirection = (transform.right * inputDirection.x + transform.forward * inputDirection.y);
+        playerController.Move(movementDirection * playerMoveSpeed * Time.deltaTime);
+    }
+
+    void OnMove(InputValue value)
+    {
+        inputDirection = value.Get<Vector2>();
         
     }
 }
