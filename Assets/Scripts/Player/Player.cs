@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateGravity();
         UpdateMovement();
     }
 
@@ -68,6 +69,12 @@ public class Player : MonoBehaviour
         input = Vector3.ClampMagnitude(input, 1f);
         input *= playerMoveSpeed;
         return input;
+    }
+
+    void UpdateGravity()
+    {
+        var gravity = Physics.gravity * mass * Time.deltaTime;
+        velocity.y = playerController.isGrounded ? - 1f : velocity.y + gravity.y;
     }
 
     void UpdateMovement()

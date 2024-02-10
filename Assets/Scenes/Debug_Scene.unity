@@ -767,6 +767,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7876647201098626442, guid: 66e7b663c73f4ff418b01eedaa862ca5,
+        type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 9191900536122836063, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
       propertyPath: playerCamera
