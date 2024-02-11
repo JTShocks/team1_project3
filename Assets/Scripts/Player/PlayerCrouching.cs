@@ -8,6 +8,7 @@ public class PlayerCrouching : MonoBehaviour
 {
     [SerializeField] float crouchHeight = 1.2f;
     [SerializeField] float crouchTransitionSpeed = 10f;
+    [SerializeField] float crouchSpeedMultiplier = .5f;
 
     Player player;
     PlayerInput playerInput;
@@ -18,6 +19,8 @@ public class PlayerCrouching : MonoBehaviour
     Vector3 initialCameraPosition;
     float standingHeight;
     float currentHeight;
+
+    bool isCrouching => standingHeight - currentHeight > .1f;
 
     void Awake()
     {
@@ -52,16 +55,36 @@ public class PlayerCrouching : MonoBehaviour
         //If the player is trying to crouch, set the height to the crouchHeight. Otherwise, set to standing height
         var heightTarget = isTryingToCrouch ? crouchHeight : standingHeight;
 
-        //Create a smooth transition between the changing views
-        var crouchDelta = Time.deltaTime * crouchTransitionSpeed;
-        currentHeight = Mathf.Lerp(currentHeight, heightTarget, crouchDelta);
+        //Check if the player is trying to get up from crouching, but let got
+        if(isCrouching && !isTryingToCrouch)
+        {
+            var castOrigin = transform.position + new Vector3(0, currentHeight/2, 0);
 
-        //Calculate the diff between the current height and the standing height
-        var halfHeightDifference = new Vector3(0, (standingHeight - currentHeight)/2, 0);
-        var newCameraPosition = initialCameraPosition - halfHeightDifference;
+            if(Physics.Raycast(castOrigin, Vector3.up, out RaycastHit hit, 0.2f))
+            {
+                var distanceToCeiling = hit.point.y - castOrigin.y;
+                heightTarget = Mathf.Max(currentHeight + distanceToCeiling - 0.1f, crouchHeight);
+            }
+        }
 
-        player.cameraTransform.localPosition = newCameraPosition;
-        player.Height = currentHeight;
+        if(!Mathf.Approximately(heightTarget, currentHeight))
+        {
+            //Create a smooth transition between the changing views
+            var crouchDelta = Time.deltaTime * crouchTransitionSpeed;
+            currentHeight = Mathf.Lerp(currentHeight, heightTarget, crouchDelta);
+
+            //Calculate the diff between the current height and the standing height
+            var halfHeightDifference = new Vector3(0, (standingHeight - currentHeight)/2, 0);
+            var newCameraPosition = initialCameraPosition - halfHeightDifference;
+
+            player.cameraTransform.localPosition = newCameraPosition;
+            player.Height = currentHeight;
+        }
+
+        if(isCrouching)
+        {
+            player.movementSpeedMultiplier *= crouchSpeedMultiplier;
+        }
 
     }
 
