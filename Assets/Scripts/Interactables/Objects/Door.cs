@@ -7,8 +7,9 @@ public class Door : MonoBehaviour, IInteractable
 
     public bool isOpen;
     public bool isLocked;
+    [SerializeField] private string prompt;
 
-    public string InteractionPrompt => throw new System.NotImplementedException();
+    public string InteractionPrompt => prompt;
 
     public void Interact(Interactor interactor)
     {

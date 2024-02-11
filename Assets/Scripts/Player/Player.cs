@@ -16,11 +16,16 @@ public class Player : MonoBehaviour
     [SerializeField] float mass = 1f;
     [SerializeField] float acceleration = 20f;
     [SerializeField] float pushPower = 2.0f;
+    public float throwPower = 10f;
     CharacterController playerController;
+
+    bool isGrounded => playerController.isGrounded;
     PlayerInput playerInput;
         InputAction moveAction;
         InputAction lookAction;
         InputAction sprintAction;
+        InputAction jumpAction;
+        InputAction interactAction;
         
     public float Height
     {
