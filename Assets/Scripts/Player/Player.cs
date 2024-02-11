@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public float throwPower = 10f;
     CharacterController playerController;
 
-    bool isGrounded => playerController.isGrounded;
+    public bool isGrounded => playerController.isGrounded;
     PlayerInput playerInput;
         InputAction moveAction;
         InputAction lookAction;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public event Action OnBeforeMove;
    public Transform cameraTransform;
 
-    Vector3 velocity;
+    internal Vector3 velocity;
     public float playerMoveSpeed = 8f;
     public float movementSpeedMultiplier;
 
