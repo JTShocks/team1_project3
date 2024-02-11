@@ -37,7 +37,7 @@ public class Door : MonoBehaviour, IInteractable
     }
     void OnEnable()
     {
-            keyScanner.OnKeyScanned += UnlockDoor;
+        keyScanner.OnKeyScanned += UnlockDoor;
     }
     void OnDisable()
     {
@@ -69,6 +69,7 @@ public class Door : MonoBehaviour, IInteractable
         //Change the state to being open
         Debug.Log("Door is now opening");
         isOpen = true;
+        gameObject.SetActive(false);
     }
     void CloseDoor()
     {
@@ -83,7 +84,6 @@ public class Door : MonoBehaviour, IInteractable
             Debug.Log("Door has been unlocked.");
             isLocked = false;
         }
-
     }
 
 }
