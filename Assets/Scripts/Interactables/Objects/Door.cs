@@ -7,7 +7,10 @@ public class Door : MonoBehaviour, IInteractable
 
     public bool isOpen;
     public bool isLocked;
-    public void Interact()
+
+    public string InteractionPrompt => throw new System.NotImplementedException();
+
+    public void Interact(Interactor interactor)
     {
         if(isLocked)
         {
@@ -31,5 +34,10 @@ public class Door : MonoBehaviour, IInteractable
     void CloseDoor()
     {
         //Change the state to being closed
+    }
+
+    bool IInteractable.Interact(Interactor interactor)
+    {
+        throw new System.NotImplementedException();
     }
 }
