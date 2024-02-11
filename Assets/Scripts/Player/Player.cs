@@ -15,11 +15,17 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float mass = 1f;
     [SerializeField] float acceleration = 20f;
+    [SerializeField] float pushPower = 2.0f;
+    public float throwPower = 10f;
     CharacterController playerController;
+
+    public bool isGrounded => playerController.isGrounded;
     PlayerInput playerInput;
         InputAction moveAction;
         InputAction lookAction;
         InputAction sprintAction;
+        InputAction jumpAction;
+        InputAction interactAction;
         
     public float Height
     {
@@ -29,8 +35,9 @@ public class Player : MonoBehaviour
     public event Action OnBeforeMove;
    public Transform cameraTransform;
 
-    Vector3 velocity;
+    internal Vector3 velocity;
     public float playerMoveSpeed = 8f;
+    public float movementSpeedMultiplier;
 
     //Interactor interactor
 
@@ -53,6 +60,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         UpdateGravity();
         UpdateMovement();
     }
@@ -67,7 +79,7 @@ public class Player : MonoBehaviour
         input += transform.forward * moveInput.y;
         input += transform.right * moveInput.x;
         input = Vector3.ClampMagnitude(input, 1f);
-        input *= playerMoveSpeed;
+        input *= playerMoveSpeed * movementSpeedMultiplier;
         return input;
     }
 
@@ -79,9 +91,11 @@ public class Player : MonoBehaviour
 
     void UpdateMovement()
     {
+        movementSpeedMultiplier = 1f;
         //Check to see if anything should happen before moving
         OnBeforeMove?.Invoke();
         var input = GetMovementInput();
+
 
 
         //Calculate the rate the player should move each frame
@@ -102,8 +116,25 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnMove(InputValue value)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        //If there is no rigidbody or the body is not meant to be moved
+        if(body == null || body.isKinematic)
+        {
+            return;
+        }
+
+        //Don't push objects below us
+        if(hit.moveDirection.y < -0.3f)
+        {
+            return;
+        }
+
+        Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        body.velocity = pushDirection * pushPower;
     }
+
 }
