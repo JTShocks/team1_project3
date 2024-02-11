@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 1746368367980451543}
   - component: {fileID: 7876647201098626442}
   - component: {fileID: 9191900536122836063}
+  - component: {fileID: 8278125150793373099}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -187,7 +188,7 @@ Transform:
   - {fileID: 3965560255087893778}
   - {fileID: 394094912034541529}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1746368367980451543
 MonoBehaviour:
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+  m_Actions: {fileID: -944628639613478452, guid: 6e23580557dfe85469835ab1cf2ffa44,
     type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
@@ -295,7 +296,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9191900536122836063
@@ -310,7 +311,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cea411a1ca7e64e8d9f6dcc3cc4edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSpeed: 5
+  mass: 1
+  acceleration: 20
+  cameraTransform: {fileID: 3965560255087893778}
   playerMoveSpeed: 10
+--- !u!114 &8278125150793373099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4386574721534364229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deebe8b5ae8af09459c7d2c1533bc7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crouchHeight: 1.2
+  crouchTransitionSpeed: 10
 --- !u!1 &6856956210462570249
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &394094912034541529
 Transform:
   m_ObjectHideFlags: 0
