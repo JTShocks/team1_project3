@@ -37,11 +37,18 @@ public class Door : MonoBehaviour, IInteractable
     }
     void OnEnable()
     {
-        keyScanner.OnKeyScanned += UnlockDoor;
+        if(keyScanner != null)
+        {
+            keyScanner.OnKeyScanned += UnlockDoor;
+        }
     }
     void OnDisable()
     {
-        keyScanner.OnKeyScanned -= UnlockDoor;
+        if(keyScanner != null)
+        {
+         keyScanner.OnKeyScanned -= UnlockDoor;
+        }
+
     }
 
     public bool Interact(Interactor interactor)
