@@ -19,6 +19,8 @@ public class Interactor : MonoBehaviour
     InputAction interactAction;
     InputAction fireAction;
 
+    bool isTryingToInteract;
+
     void Awake()
     {
         player = GetComponent<Player>();
