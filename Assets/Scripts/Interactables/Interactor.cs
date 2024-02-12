@@ -8,11 +8,11 @@ public class Interactor : MonoBehaviour
 
     public bool wireframeEnabled;
     public Transform interactionPoint;
-    [SerializeField] private float interactionPointRadius = 0.5f;
+    [SerializeField] private float interactionPointDistance = 0.5f;
     [SerializeField] private LayerMask interactionMask;
 
     private readonly Collider[] colliders = new Collider [3];
-    [SerializeField] private int numFound;
+    [SerializeField] private bool itemInWay;
     Player player;
     PlayerInput playerInput;
 
@@ -34,10 +34,10 @@ public class Interactor : MonoBehaviour
 
         var isTryingToFire = fireAction.ReadValue<float>() > 0;
 
-        //Find everything in the sphere that is part of the interactable mask
-        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactionMask);
+        //Find everything in the ray that is part of the interactable mask
+        itemInWay = Physics.Raycast(interactionPoint.position, interactionPoint.position + Vector3.forward * interactionPointDistance, interactionMask);
 
-        if(numFound > 0)
+        if(itemInWay)
         {
             var interactable = colliders[0].GetComponent<IInteractable>();
             if(interactable != null && isTryingToInteract)
@@ -63,6 +63,6 @@ public class Interactor : MonoBehaviour
             return;
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
+        Gizmos.DrawLine(interactionPoint.position, interactionPoint.position + Vector3.forward * interactionPointDistance);
     }
 }
