@@ -25,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private EnemyState currentState;
+    public Transform headTransform;
 
     [Tooltip("This is what determines how close the enemy should get to their waypoint before trying to move to the next one")]
     [Range(0.1f, 1f)]
@@ -32,6 +33,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Transform currentWaypoint;
     private Rigidbody rb;
+
+    internal Vector3 playerLastSeen;
     
     void Start()
     {
@@ -56,6 +59,9 @@ public class EnemyBehaviour : MonoBehaviour
             case EnemyState.Alert:
             MoveToPlayerLastSeen();
             break;
+            case EnemyState.Chase:
+
+            break;
         }
         
     }
@@ -63,6 +69,14 @@ public class EnemyBehaviour : MonoBehaviour
     void ChangeEnemyState(EnemyState newState)
     {
 
+        switch(newState)
+        {
+            case EnemyState.Alert:
+            //Invoke the event when the player is spotted
+            
+            break;
+        }
+        currentState = newState;
     }
 
     void FollowWaypoint()
@@ -76,6 +90,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     void MoveToPlayerLastSeen()
     {
-
+        rb.position = Vector3.MoveTowards(transform.position, playerLastSeen, moveSpeed * Time.deltaTime);
+        if(Vector3.Distance(transform.position, playerLastSeen) < distanceThreshold)
+        {           
+            //Look around to see if they still see the player
+            //Start a coroutine for waiting a few moments
+            //If they don't see anything, they return to patrol
+        }
     }
 }
