@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Threading;
 
 public class Interactor : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Interactor : MonoBehaviour
 
     private readonly Collider[] colliders = new Collider [3];
     [SerializeField] private bool itemInWay;
+    float timer = 0f;
+    bool isAlreadyInteracting;
     Player player;
     PlayerInput playerInput;
 
@@ -34,28 +37,27 @@ public class Interactor : MonoBehaviour
     }
     void Update()
     {
-        var isTryingToInteract = interactAction.ReadValue<float>() > 0;
+        timer += Time.deltaTime;
+        var isTryingToInteract = interactAction.WasPressedThisFrame();
 
         var isTryingToFire = fireAction.ReadValue<float>() > 0;
-
 
         RaycastHit hit;
         //Find everything in the ray that is part of the interactable mask
         if(Physics.Raycast(interactionPoint.position, interactionPoint.forward,out hit, interactionPointDistance, interactionMask))
         {
             var interactable = hit.collider.GetComponent<IInteractable>();
-            
+
             var physicsObject = hit.collider.GetComponent<PhysicsObject>();
+            //handsAreFull = physicsObject.isPickedUp;
             if(interactable != null)
             {
                 ChangeInteractText(interactable.InteractionPrompt);
                 if(isTryingToInteract)
                 {
                     interactable.Interact(this);
-                    if(physicsObject != null)
-                    {
-                        handsAreFull = physicsObject.isPickedUp;
-                    }
+
+
                 }
 
                 if(isTryingToFire)
@@ -75,6 +77,10 @@ public class Interactor : MonoBehaviour
             {
                 interactText.text = "";
             }
+        }
+        else
+        {
+            ChangeInteractText("");
         }
     }
 

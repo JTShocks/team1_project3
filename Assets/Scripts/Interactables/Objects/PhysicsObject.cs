@@ -21,11 +21,12 @@ public class PhysicsObject : MonoBehaviour, IInteractable
         if(isPickedUp)
         {
             DropObject();
-            return true;
         }
-
-        PickupObject(interactor.interactionPoint.transform);
-        return true;
+        else
+        {
+            PickupObject(interactor.interactionPoint.transform);
+        }
+         return true;
     }
 
     void PickupObject(Transform holdPosition)

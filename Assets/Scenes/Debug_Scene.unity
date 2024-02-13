@@ -1159,6 +1159,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672104601715032714, guid: 19ea60762308f9548bf081d281f6a44a,
         type: 3}
+      propertyPath: prompt
+      value: Press E to Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672104601715032714, guid: 19ea60762308f9548bf081d281f6a44a,
+        type: 3}
       propertyPath: keyScanner
       value: 
       objectReference: {fileID: 180307853}
@@ -1332,6 +1337,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744420932860203162, guid: 66e7b663c73f4ff418b01eedaa862ca5,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
