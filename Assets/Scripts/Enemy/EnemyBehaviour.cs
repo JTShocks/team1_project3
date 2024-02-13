@@ -27,9 +27,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private EnemyState currentState;
-    public Transform headTransform;
     [SerializeField] public Player player;
-        [SerializeField] LayerMask playerMask;
+    [SerializeField] LayerMask playerMask;
 
     [Tooltip("This is what determines how close the enemy should get to their waypoint before trying to move to the next one")]
     [Range(0.1f, 1f)]
@@ -37,7 +36,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Transform currentWaypoint;
     private Rigidbody rb;
-    [SerializeField] private Detector detector;
 
     [SerializeField] float currentAwareness = 0f;
     [SerializeField] float maxAwareness = 100f;
@@ -59,7 +57,6 @@ public class EnemyBehaviour : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        detector = GetComponentInChildren<Detector>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = moveSpeed;
 
@@ -107,6 +104,7 @@ public class EnemyBehaviour : MonoBehaviour
                 
                 if(playerIsSeen)
                 {
+                    searchTimer = 5f;
                     navMeshAgent.SetDestination(player.transform.position);
                 }
                 else 
