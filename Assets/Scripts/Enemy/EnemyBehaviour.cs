@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.RenderGraphModule;
+
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -40,12 +37,16 @@ public class EnemyBehaviour : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Detector detector;
 
-    internal Vector3 playerLastSeen;
     [SerializeField] float currentAwareness = 0f;
     [SerializeField] float maxAwareness = 100f;
 
     internal float timeLastSawPlayer;
-    [SerializeField] float searchTime = 5f;
+    [SerializeField] float searchTimer = 5f;
+
+    [SerializeField] internal float enemyViewAngle = .3f;
+
+    [SerializeField] bool playerIsSeen;
+    [SerializeField] bool playerIsInRange;
 
     Vector3 lookTarget;
     
@@ -65,10 +66,10 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(detector.playerIsSeen)
-        {
-            lookTarget = player.transform.position;
-        }
+        
+        playerIsSeen = detector.CheckLineOfSight();
+
+        
         lookTarget.y = transform.position.y;
         transform.LookAt(lookTarget);
 
@@ -77,41 +78,52 @@ public class EnemyBehaviour : MonoBehaviour
         {
             case EnemyState.Patrolling:
             //When the enenmy is patrolling, they should move along their waypoints
-            FollowWaypoint();
+                FollowWaypoint();
+                if(playerIsSeen)
+                {
+                    ChangeEnemyState(EnemyState.Chase);
+                }
             break;
             case EnemyState.Alert:
-            if(detector.playerIsSeen && currentAwareness < maxAwareness)
-            {
-                ChangeAwareness(30);
-            }
-            if(detector.playerIsSeen == false && currentAwareness > 0)
-            {
-                //If the enemy cannot see the player, then lower the awareness over time until it reaches 0
-                ChangeAwareness(-30);
-            }
-            MoveToPlayerLastSeen();
+                MoveToPlayerLastSeen();
+                if(playerIsSeen && currentAwareness < maxAwareness)
+                {
+                    ChangeAwareness(30);
+                }
+                if(!playerIsSeen && currentAwareness > 0)
+                {
+                    //If the enemy cannot see the player, then lower the awareness over time until it reaches 0
+                    ChangeAwareness(-30);
+                }
+
             break;
             case EnemyState.Chase:
-            Debug.Log("Enemy is now chasing the player");
-            if(detector.playerIsSeen)
-            {
-                ChasePlayer();
-            }
-            else if(Time.time > timeLastSawPlayer + searchTime)
-            {
-                Debug.Log("Enemy lost track of player");
-                currentAwareness = 0;
-                ChangeEnemyState(EnemyState.Patrolling);
-            }
+                Debug.Log("Enemy is now chasing the player");
+                lookTarget = detector.playerLastSeen;
+                if(playerIsSeen)
+                {
+                    ChasePlayer();
+                }
+                else 
+                {
+                    MoveToPlayerLastSeen();
+                    searchTimer -= Time.deltaTime;
+                    if(searchTimer <= 0)
+                    {
+                        ChangeEnemyState(EnemyState.Patrolling);
+                    }
+                }
             break;
         } 
     }
 
     public void ChangeEnemyState(EnemyState newState)
     {
+
         switch(newState)
         {
             case EnemyState.Patrolling:
+
             break;
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
@@ -119,6 +131,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             break;
             case EnemyState.Chase:
+            searchTimer = 5f;
             break;
         }
         currentState = newState;
@@ -137,9 +150,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     void MoveToPlayerLastSeen()
     {
-
-        transform.position = Vector3.MoveTowards(transform.position, playerLastSeen, moveSpeed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, playerLastSeen) <= 1)
+        transform.position = Vector3.MoveTowards(transform.position, detector.playerLastSeen, moveSpeed * Time.deltaTime);
+        if(Vector3.Distance(transform.position, detector.playerLastSeen) <= 1)
         {           
             
             //Look around to see if they still see the player
@@ -149,7 +161,6 @@ public class EnemyBehaviour : MonoBehaviour
     }
     void ChasePlayer()
     {
-        lookTarget = player.transform.position;
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
     }
 
@@ -176,6 +187,8 @@ public class EnemyBehaviour : MonoBehaviour
         //If not, lower the awareness every frame the player is NOT in view of the enemy
         yield return null;
     }
+
+
 
 
 

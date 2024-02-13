@@ -814,6 +814,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1410475748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410475744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0482e5e803c796d469e4bc14d808e79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagToFilter: Player
+  enemy: {fileID: 0}
+  sightRange: 15
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 243
+  player: {fileID: 4434533102346006281}
 --- !u!1 &1432652904
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,14 +843,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1432652905}
   - component: {fileID: 1432652906}
-  - component: {fileID: 1432652907}
   m_Layer: 8
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1432652905
 Transform:
   m_ObjectHideFlags: 0
@@ -860,33 +878,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagToFilter: Player
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
   enemy: {fileID: 1135261934}
-  playerIsSeen: 0
-  player: {fileID: 4434533102346006281}
---- !u!65 &1432652907
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432652904}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
+  sightRange: 10
+  playerMask:
     serializedVersion: 2
     m_Bits: 128
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15.477336, y: 2.3794303, z: 6.2024074}
-  m_Center: {x: -0.49653387, y: -0.68971515, z: 2.6012027}
+  player: {fileID: 4434533102346006281}
 --- !u!1 &1665400949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,6 +1216,11 @@ PrefabInstance:
       propertyPath: headTransform
       value: 
       objectReference: {fileID: 1432652905}
+    - target: {fileID: 1709042513708353988, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
+      propertyPath: enemyViewAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1992147094580544175, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
       propertyPath: m_Layer
@@ -1479,6 +1481,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3606349267509535577, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1410475748}
+    - targetCorrespondingSourceObject: {fileID: 3606349267509535577, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 1410475746}
   m_SourcePrefab: {fileID: 100100000, guid: 6fbd240abb2c0c141866a6ff0f2476fe, type: 3}
@@ -1600,7 +1606,7 @@ PrefabInstance:
     - target: {fileID: 1893427731652029745, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1893427731652029745, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
@@ -1645,7 +1651,7 @@ PrefabInstance:
     - target: {fileID: 3965560255087893778, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4386574721534364229, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
@@ -1670,7 +1676,7 @@ PrefabInstance:
     - target: {fileID: 7876647201098626442, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}
       propertyPath: m_Center.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7876647201098626442, guid: 66e7b663c73f4ff418b01eedaa862ca5,
         type: 3}

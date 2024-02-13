@@ -8,72 +8,44 @@ public class Detector : MonoBehaviour
     //This is the script holding the detection logic for the enemies
     //Basically, if they see the player (but not too long), they will move to the last known location they saw the player
     [SerializeField] private string tagToFilter;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField]EnemyBehaviour enemy;
-    bool playerIsInRange;
-    public bool playerIsSeen;
+    [SerializeField] EnemyBehaviour enemy;
+    [SerializeField] float sightRange;
+    [SerializeField] LayerMask playerMask;
 
-    internal Vector3 playerPosition;
+    internal Vector3 playerLastSeen;
     [SerializeField] internal Transform player;
     
 
     void Awake()
     {
-
+        enemy = GetComponent<EnemyBehaviour>();
     }
 
-    void FixedUpdate()
+    public bool CheckLineOfSight()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, enemy.player.transform.position, out hit))
+        //Position of the player in relation to the enemy
+        Vector3 targetDirection = player.position - transform.position;
+        targetDirection.Normalize();
+        float dotProduct = Vector3.Dot(transform.forward, targetDirection);
+        if(dotProduct > enemy.enemyViewAngle)
+        {
+            //Player is in view range
+            Debug.Log("Player is in viewing range");
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, player.transform.position, out hit, Mathf.Infinity, playerMask))
             {
-                if(hit.transform == player)
+                Debug.Log(hit.collider.gameObject);
+                if(hit.collider.CompareTag(tagToFilter))
                 {
-                    //If the player can be see from the enemy head position, save that as confirmation
-                    enemy.playerLastSeen = playerPosition;
-                    enemy.timeLastSawPlayer = Time.time;
-                    Debug.Log(enemy.timeLastSawPlayer);
-                    //The player can be seen from this position
-                    if(!playerIsSeen)
-                    {
-                        playerIsSeen = true;
-                        Debug.Log("Can be seen");
-                        enemy.ChangeEnemyState(EnemyBehaviour.EnemyState.Alert);
-                    }
+                    //Confirming it can see the player, returns a position
 
+                    playerLastSeen = player.transform.position;
+                    return true;
                 }
-                else
-                {
-                    playerIsSeen = false;
-                    Debug.Log("Cannot be seen");
-                }
-
             }
-
-    }
-
-
-    void OnTriggerStay(Collider collider)
-    {
-        //If the tag matches the objects it is looking for
-        if(collider.CompareTag(tagToFilter))
-        {
-            playerIsInRange = true;
-            player = collider.transform;
-            //Player is in the range of the enemy vision
-            Debug.Log("Player is in range of enemy");
-            playerPosition = collider.transform.position;
-            //Store WHERE the player is when they are in range
-            //Use a raycast to CONFIRM if they can see the player (so they don't track the player through walls)
         }
-    }
+        return false;
 
-    void OnTriggerExit(Collider collider)
-    {
-        if(collider.CompareTag(tagToFilter))
-        {
-            playerIsInRange = false;
-        }
     }
     void OnDrawGizmos()
     {
