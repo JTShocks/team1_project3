@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class EnemyBehaviour : MonoBehaviour
@@ -28,6 +29,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private EnemyState currentState;
     public Transform headTransform;
     [SerializeField] public Player player;
+        [SerializeField] LayerMask playerMask;
 
     [Tooltip("This is what determines how close the enemy should get to their waypoint before trying to move to the next one")]
     [Range(0.1f, 1f)]
@@ -48,12 +50,20 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] bool playerIsSeen;
     [SerializeField] bool playerIsInRange;
 
+    Collider enemyCollider;
+
+    NavMeshAgent navMeshAgent;
+
     Vector3 lookTarget;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         detector = GetComponentInChildren<Detector>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = moveSpeed;
+
+        enemyCollider = GetComponent<Collider>();
         //Initial position of first waypoint
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
         transform.position = currentWaypoint.position;
@@ -67,11 +77,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         
-        playerIsSeen = detector.CheckLineOfSight();
-
-        
-        lookTarget.y = transform.position.y;
-        transform.LookAt(lookTarget);
+        playerIsSeen = CheckLineOfSight();
 
         
         switch(currentState)
@@ -85,7 +91,6 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             break;
             case EnemyState.Alert:
-                MoveToPlayerLastSeen();
                 if(playerIsSeen && currentAwareness < maxAwareness)
                 {
                     ChangeAwareness(30);
@@ -99,14 +104,13 @@ public class EnemyBehaviour : MonoBehaviour
             break;
             case EnemyState.Chase:
                 Debug.Log("Enemy is now chasing the player");
-                lookTarget = detector.playerLastSeen;
+                
                 if(playerIsSeen)
                 {
-                    ChasePlayer();
+                    navMeshAgent.SetDestination(player.transform.position);
                 }
                 else 
                 {
-                    MoveToPlayerLastSeen();
                     searchTimer -= Time.deltaTime;
                     if(searchTimer <= 0)
                     {
@@ -140,28 +144,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     void FollowWaypoint()
     {
-        lookTarget = currentWaypoint.position;
-        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
+        navMeshAgent.SetDestination(currentWaypoint.position);
+        //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
         if(Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold)
         {           
             currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
         }
-    }
-
-    void MoveToPlayerLastSeen()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, detector.playerLastSeen, moveSpeed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, detector.playerLastSeen) <= 1)
-        {           
-            
-            //Look around to see if they still see the player
-            //Start a coroutine for waiting a few moments
-            //If they don't see anything, they return to patrol
-        }
-    }
-    void ChasePlayer()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
     }
 
     void ChangeAwareness(float amount)
@@ -187,6 +175,32 @@ public class EnemyBehaviour : MonoBehaviour
         //If not, lower the awareness every frame the player is NOT in view of the enemy
         yield return null;
     }
+
+    public bool CheckLineOfSight()
+    {
+        //Position of the player in relation to the enemy
+        Vector3 targetDirection = player.transform.position - transform.position;
+        targetDirection.Normalize();
+        float dotProduct = Vector3.Dot(transform.forward, targetDirection);
+        if(dotProduct > enemyViewAngle)
+        {
+            //Player is in view range
+            Debug.Log("Player is in viewing range");
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, (player.transform.position - transform.position).normalized);
+            if(Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, out hit, Mathf.Infinity, playerMask))
+            {
+                Debug.Log(hit.collider.gameObject);
+                if(hit.collider.CompareTag("Player"))
+                {
+                    //Confirming it can see the player, returns a position
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 
 
