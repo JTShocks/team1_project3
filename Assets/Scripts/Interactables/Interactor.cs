@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Interactor : MonoBehaviour
 {
 
     public bool wireframeEnabled;
+    private bool handsAreFull;
     public Transform interactionPoint;
     [SerializeField] private float interactionPointDistance = 0.5f;
     [SerializeField] private LayerMask interactionMask;
+
+    [SerializeField] private TextMeshProUGUI interactText;
 
     private readonly Collider[] colliders = new Collider [3];
     [SerializeField] private bool itemInWay;
@@ -34,26 +38,49 @@ public class Interactor : MonoBehaviour
 
         var isTryingToFire = fireAction.ReadValue<float>() > 0;
 
+
+        RaycastHit hit;
         //Find everything in the ray that is part of the interactable mask
-        itemInWay = Physics.Raycast(interactionPoint.position, interactionPoint.position + Vector3.forward * interactionPointDistance, interactionMask);
-
-        if(itemInWay)
+        if(Physics.Raycast(interactionPoint.position, interactionPoint.forward,out hit, interactionPointDistance, interactionMask))
         {
-            var interactable = colliders[0].GetComponent<IInteractable>();
-            if(interactable != null && isTryingToInteract)
+            var interactable = hit.collider.GetComponent<IInteractable>();
+            
+            var physicsObject = hit.collider.GetComponent<PhysicsObject>();
+            if(interactable != null)
             {
-                interactable.Interact(this);
-            }
-
-            if(interactable != null && isTryingToFire)
-            {
-                var physicsObject = colliders[0].GetComponent<PhysicsObject>();
-                if(physicsObject != null)
+                ChangeInteractText(interactable.InteractionPrompt);
+                if(isTryingToInteract)
                 {
-                    physicsObject.ThrowObject(interactionPoint.forward, player.throwPower);
+                    interactable.Interact(this);
+                    if(physicsObject != null)
+                    {
+                        handsAreFull = physicsObject.isPickedUp;
+                    }
+                }
+
+                if(isTryingToFire)
+                {
+                    if(physicsObject != null)
+                    {
+                        physicsObject.ThrowObject(interactionPoint.forward, player.throwPower);
+                    }
                 }
             }
+            else
+            {
+                ChangeInteractText("");
+            }
+
+            if(handsAreFull)
+            {
+                interactText.text = "";
+            }
         }
+    }
+
+    void ChangeInteractText(string newPrompt)
+    {
+        interactText.text = newPrompt;
     }
 
     private void OnDrawGizmos()
@@ -63,6 +90,5 @@ public class Interactor : MonoBehaviour
             return;
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(interactionPoint.position, interactionPoint.position + Vector3.forward * interactionPointDistance);
     }
 }

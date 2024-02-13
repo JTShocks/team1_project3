@@ -8,7 +8,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
     [SerializeField] private string prompt = "Press E to pickup";
     public string InteractionPrompt => prompt;
     Rigidbody rb;
-    bool isPickedUp;
+    public bool isPickedUp;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();

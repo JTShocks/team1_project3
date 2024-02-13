@@ -53,6 +53,9 @@ public class EnemyBehaviour : MonoBehaviour
             //When the enenmy is patrolling, they should move along their waypoints
             FollowWaypoint();
             break;
+            case EnemyState.Alert:
+            MoveToPlayerLastSeen();
+            break;
         }
         
     }
@@ -69,5 +72,10 @@ public class EnemyBehaviour : MonoBehaviour
         {           
             currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
         }
+    }
+
+    void MoveToPlayerLastSeen()
+    {
+
     }
 }
