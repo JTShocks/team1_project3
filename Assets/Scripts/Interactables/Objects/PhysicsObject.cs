@@ -9,9 +9,31 @@ public class PhysicsObject : MonoBehaviour, IInteractable
     public string InteractionPrompt => prompt;
     Rigidbody rb;
     public bool isPickedUp;
+    public bool isBeingThrown;
+    [SerializeField] float stunAmount;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        isBeingThrown = rb.velocity.magnitude > .5;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        EnemyBehaviour enemy = collision.collider.GetComponent<EnemyBehaviour>();
+        if(enemy != null && isBeingThrown)
+        {
+            enemy.stunnedTimer = stunAmount;
+            enemy.isStunned = true;
+
+            
+        }
+        else
+        {
+           Debug.Log("Didn't hit anything"); 
+        }
     }
 
     //This is a generic script to work with ALL physics objects you can pickup and throw

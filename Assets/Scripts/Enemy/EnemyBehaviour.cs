@@ -25,7 +25,8 @@ public class EnemyBehaviour : MonoBehaviour
     //This is where the path of the enemy is stored when they patrol
     public event Action PlayerSpotted;
     [SerializeField] private Waypoints waypoints;
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float baseMoveSpeed = 5f;
+    float currentMovespeed;
     [SerializeField] private EnemyState currentState;
     [SerializeField] public Player player;
     [SerializeField] LayerMask playerMask;
@@ -37,6 +38,8 @@ public class EnemyBehaviour : MonoBehaviour
     private Transform currentWaypoint;
     private Rigidbody rb;
 
+    Coroutine enemyStunned;
+
     [SerializeField] float currentAwareness = 0f;
     [SerializeField] float maxAwareness = 100f;
 
@@ -47,18 +50,20 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] bool playerIsSeen;
     [SerializeField] bool playerIsInRange;
+    public bool isStunned;
+    [SerializeField] internal float stunnedTimer;
 
     Collider enemyCollider;
-
     NavMeshAgent navMeshAgent;
-
     Vector3 lookTarget;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = moveSpeed;
+        currentMovespeed = baseMoveSpeed;
+        
+        
 
         enemyCollider = GetComponent<Collider>();
         //Initial position of first waypoint
@@ -73,10 +78,19 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        navMeshAgent.speed = currentMovespeed;
         playerIsSeen = CheckLineOfSight();
+        if(isStunned)
+        {
+            currentMovespeed = 0;
+            stunnedTimer -= Time.deltaTime;
+            if(stunnedTimer <= 0)
+            {
+                currentMovespeed = baseMoveSpeed;
+                isStunned = false;
+            }
+        }
 
-        
         switch(currentState)
         {
             case EnemyState.Patrolling:
@@ -84,14 +98,18 @@ public class EnemyBehaviour : MonoBehaviour
                 FollowWaypoint();
                 if(playerIsSeen)
                 {
-                    ChangeEnemyState(EnemyState.Chase);
+                    ChangeEnemyState(EnemyState.Alert);
                 }
             break;
             case EnemyState.Alert:
+            if(!isStunned)
+            {
                 if(playerIsSeen && currentAwareness < maxAwareness)
                 {
                     ChangeAwareness(30);
                 }
+            }
+
                 if(!playerIsSeen && currentAwareness > 0)
                 {
                     //If the enemy cannot see the player, then lower the awareness over time until it reaches 0
@@ -119,7 +137,7 @@ public class EnemyBehaviour : MonoBehaviour
         } 
     }
 
-    public void ChangeEnemyState(EnemyState newState)
+    void ChangeEnemyState(EnemyState newState)
     {
 
         switch(newState)
@@ -183,6 +201,7 @@ public class EnemyBehaviour : MonoBehaviour
         if(dotProduct > enemyViewAngle)
         {
             //Player is in view range
+            playerIsInRange = true;
             Debug.Log("Player is in viewing range");
             RaycastHit hit;
             Ray ray = new Ray(transform.position, (player.transform.position - transform.position).normalized);
@@ -196,13 +215,7 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
         }
+        playerIsInRange = false;
         return false;
     }
-
-
-
-
-
-
-
 }
