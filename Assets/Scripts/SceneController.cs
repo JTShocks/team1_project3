@@ -7,11 +7,11 @@ public class SceneController : MonoBehaviour
 {
    void OnEnable()
    {
-      EnemyBehaviour.OnPlayerCaught += ReloadScene;
+      CaptureBox.OnPlayerCaught += ReloadScene;
    }
    void OnDisable()
    {
-      EnemyBehaviour.OnPlayerCaught -= ReloadScene;
+      CaptureBox.OnPlayerCaught -= ReloadScene;
    }
 
    void ReloadScene()

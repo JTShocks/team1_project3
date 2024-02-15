@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float throwPower = 10f;
     CharacterController playerController;
 
+
     public bool isGrounded => playerController.isGrounded;
     PlayerInput playerInput;
         InputAction moveAction;
@@ -125,14 +126,6 @@ public class Player : MonoBehaviour
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
         body.velocity = pushDirection * pushPower;
-
-        EnemyBehaviour enemy = body.GetComponent<EnemyBehaviour>();
-        if(enemy != null)
-        {
-            //If the player is touched by the enemy/ the enemy catches them
-            //The player should lose.
-            //The screen will fade to black, show some text like "It is time to wake up...", and resets the level
-        }
     }
 
 }

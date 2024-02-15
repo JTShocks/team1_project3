@@ -1342,25 +1342,10 @@ PrefabInstance:
       propertyPath: waypoints
       value: 
       objectReference: {fileID: 1865734500}
-    - target: {fileID: 1709042513708353988, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
-        type: 3}
-      propertyPath: playerMask.m_Bits
-      value: 193
-      objectReference: {fileID: 0}
     - target: {fileID: 3606349267509535577, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606349267509535577, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6345874676196856216, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7654161490006654092, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
