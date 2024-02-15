@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WheelChair : MonoBehaviour, IInteractable
+public class WheelChair : PhysicsObject
 {
-    [SerializeField] private string prompt;
-    public string InteractionPrompt => prompt;
 
-    public bool Interact(Interactor interactor)
+    [SerializeField] bool isBeingHeld;
+    public override bool Interact(Interactor interactor)
     {
-        throw new System.NotImplementedException();
+        AlignChair(interactor.transform.forward);
+        return false;
+    }
+
+    public override void ThrowObject(Vector3 direction, float throwForce)
+    {
+        base.ThrowObject(direction, throwForce);
+    }
+
+    void AlignChair(Vector3 forward)
+    {
+
     }
 }

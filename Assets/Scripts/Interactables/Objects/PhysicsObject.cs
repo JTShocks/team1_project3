@@ -38,7 +38,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 
     //This is a generic script to work with ALL physics objects you can pickup and throw
 
-    public bool Interact(Interactor interactor)
+    public virtual bool Interact(Interactor interactor)
     {
         if(isPickedUp)
         {
@@ -70,7 +70,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
         isPickedUp = false;
     }
 
-    public void ThrowObject(Vector3 direction, float throwForce)
+    public virtual void ThrowObject(Vector3 direction, float throwForce)
     {
         //This is the function that lets the player throw the object
         rb.isKinematic = false;
