@@ -225,7 +225,9 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if(collision.collider.CompareTag("Player"))
         {
+                        Debug.Log("Player has touched an enemy");
             OnPlayerCaught?.Invoke();
+
         }
     }
 }
