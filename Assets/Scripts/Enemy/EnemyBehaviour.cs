@@ -24,6 +24,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     //This is where the path of the enemy is stored when they patrol
     public event Action PlayerSpotted;
+    public delegate void PlayerCaught();
+    public static PlayerCaught OnPlayerCaught;
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float baseMoveSpeed = 5f;
     float currentMovespeed;
@@ -217,5 +219,13 @@ public class EnemyBehaviour : MonoBehaviour
         }
         playerIsInRange = false;
         return false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Player"))
+        {
+            OnPlayerCaught?.Invoke();
+        }
     }
 }
