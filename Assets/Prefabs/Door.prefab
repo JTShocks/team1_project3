@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5654114196627283659}
   - component: {fileID: 406855466074693291}
   - component: {fileID: 3094600008723182421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6672104601715032714}
   - component: {fileID: 3102475533506535756}
   - component: {fileID: 4093627539457409510}
+  - component: {fileID: 2242528158018362619}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -117,7 +118,7 @@ Transform:
   - {fileID: 5654114196627283659}
   - {fileID: 6029635119780763455}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6672104601715032714
 MonoBehaviour:
@@ -131,14 +132,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a9b913c1bf5004c86b2d6edb19a728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: 
+  prompt: Press E to Open
   isLocked: 0
   keyScanner: {fileID: 0}
   isOpen: 0
-  isRotatingDoor: 0
+  isRotatingDoor: 1
   speed: 1
   rotationAmount: 90
-  forwardDirection: 0
+  forwardDirection: 1
+  openDoorSound: {fileID: 0}
+  closeDoorSound: {fileID: 0}
+  lockedDoorSound: {fileID: 0}
 --- !u!54 &3102475533506535756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -187,6 +191,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.25, y: 3, z: 2}
   m_Center: {x: 0, y: 1.5, z: -1}
+--- !u!208 &2242528158018362619
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5532724489865120643}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.125, y: 1.5, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: -1}
+  m_TimeToStationary: 0.5
 --- !u!1001 &6063859732601237716
 PrefabInstance:
   m_ObjectHideFlags: 0
