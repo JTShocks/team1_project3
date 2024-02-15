@@ -7,7 +7,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private string prompt = "Press E to pickup";
     public string InteractionPrompt => prompt;
-    Rigidbody rb;
+    public Rigidbody rb;
     public bool isPickedUp;
     public bool isBeingThrown;
     [SerializeField] float stunAmount;
@@ -16,9 +16,23 @@ public class PhysicsObject : MonoBehaviour, IInteractable
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void OnEnable()
+    {
+        Interactor.OnThrowObject += ThrowObject;
+    }
+    void OnDisable()
+    {
+        Interactor.OnThrowObject -= ThrowObject;
+    }
+
+    public virtual void Update()
     {
         isBeingThrown = rb.velocity.magnitude > .5;
+        if(isPickedUp)
+        {
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+            //transform.localPosition = Vector3.forward;
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -62,7 +76,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 
     }
 
-    void DropObject()
+    public virtual void DropObject()
     {
         rb.isKinematic = false;
         rb.useGravity = true;
@@ -72,11 +86,15 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 
     public virtual void ThrowObject(Vector3 direction, float throwForce)
     {
-        //This is the function that lets the player throw the object
-        rb.isKinematic = false;
-        transform.parent = null;
-        rb.useGravity = true;
-        rb.AddForce(direction * throwForce);
+        if(!isBeingThrown && isPickedUp)
+        {
+            throwForce *= rb.mass;
+            //This is the function that lets the player throw the object
+            DropObject();
+            rb.AddForce(direction * throwForce);
+
+        }
+
     }
 
 }
