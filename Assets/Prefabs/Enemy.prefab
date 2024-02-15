@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: {fileID: 0}
-  moveSpeed: 3
+  baseMoveSpeed: 5
   currentState: 1
   player: {fileID: 0}
   playerMask:
@@ -63,6 +63,8 @@ MonoBehaviour:
   enemyViewAngle: 0
   playerIsSeen: 0
   playerIsInRange: 0
+  isStunned: 0
+  stunnedTimer: 3
 --- !u!54 &6345874676196856216
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89,7 +91,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 84
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!136 &361191435288978436
 CapsuleCollider:
   m_ObjectHideFlags: 0
