@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     // Player has the camera and moves around
     // Need to get ref to the CharacterController
     [Header("Player Statistics and Values")]
-    [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float mass = 1f;
     [SerializeField] float acceleration = 20f;
     [SerializeField] float pushPower = 2.0f;
@@ -39,22 +38,18 @@ public class Player : MonoBehaviour
     public float playerMoveSpeed = 8f;
     public float movementSpeedMultiplier;
 
-    //Interactor interactor
+    //When the player makes it to the exit, the game should fade to white, then reset back to the main menu
 
-    // What does the player need to be able to do?
-    //1. Move around
-    //2. Crouch (lower the camera and reduce the player hitbox)
-    //3. Interact with objects (use an outsider Interactor component)
-    //4. Pickup objects, then throw them in a direction
+    // Main Menu > Level >if Game over < Reset level : else > do a white out and return to main menu
 
-    // Start is called before the first frame update
+    // NICE TO HAVE OPTIONS
+    // Settings menu to change sensitivity or remove the crosshair
+    //  Gives something a little bit extra for the teacher when playing and should be easy to implement
     void Awake()
     {
         playerController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["move"];
-
-        //interactor = GetComponent<Interactor>();
     }
 
     // Update is called once per frame
@@ -111,11 +106,6 @@ public class Player : MonoBehaviour
         
     }
 
-    void UpdateLook()
-    {
-
-    }
-
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
@@ -135,6 +125,14 @@ public class Player : MonoBehaviour
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
         body.velocity = pushDirection * pushPower;
+
+        EnemyBehaviour enemy = body.GetComponent<EnemyBehaviour>();
+        if(enemy != null)
+        {
+            //If the player is touched by the enemy/ the enemy catches them
+            //The player should lose.
+            //The screen will fade to black, show some text like "It is time to wake up...", and resets the level
+        }
     }
 
 }
