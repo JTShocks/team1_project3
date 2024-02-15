@@ -453,11 +453,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cea411a1ca7e64e8d9f6dcc3cc4edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 5
   mass: 1
   acceleration: 20
   pushPower: 2
-  throwPower: 5
+  throwPower: 1000
   cameraTransform: {fileID: 3965560255087893778}
   playerMoveSpeed: 10
   movementSpeedMultiplier: 0
