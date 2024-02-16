@@ -229,7 +229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1f9170602148e8441a1575501f291107, type: 2}
+  - {fileID: 2100000, guid: de3f4bca1b2d60346bb307a32e3539d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -322,6 +322,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a7e8aff981997064d89bb528f545abe9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 16f355438319b7c4fbd9fbb17c80dcf7, type: 2}
     - target: {fileID: 919132149155446097, guid: a7e8aff981997064d89bb528f545abe9,
         type: 3}
       propertyPath: m_Name
@@ -1336,11 +1341,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.629
       objectReference: {fileID: 0}
+    - target: {fileID: -3075322711277962525, guid: 86349a968b2a04647a53d45a45177bbb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0644323273993849a082b934e1b342e, type: 2}
     - target: {fileID: 919132149155446097, guid: 86349a968b2a04647a53d45a45177bbb,
         type: 3}
       propertyPath: m_Name
       value: Lounge Door 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3062256051733565589, guid: 86349a968b2a04647a53d45a45177bbb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 986126a700ed19748b834f4d3c7003cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2154,6 +2169,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 283711401}
     m_Modifications:
+    - target: {fileID: -9041531117694079289, guid: 81290f137a2d25c46a7125b709eeb7d9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 986126a700ed19748b834f4d3c7003cd, type: 2}
     - target: {fileID: -8679921383154817045, guid: 81290f137a2d25c46a7125b709eeb7d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -2229,6 +2249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lounge Door 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: 81290f137a2d25c46a7125b709eeb7d9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0644323273993849a082b934e1b342e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2632,6 +2657,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -6592,6 +6622,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -7006,11 +7041,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.705
       objectReference: {fileID: 0}
+    - target: {fileID: -3075322711277962525, guid: 86349a968b2a04647a53d45a45177bbb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0644323273993849a082b934e1b342e, type: 2}
     - target: {fileID: 919132149155446097, guid: 86349a968b2a04647a53d45a45177bbb,
         type: 3}
       propertyPath: m_Name
       value: Start Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3062256051733565589, guid: 86349a968b2a04647a53d45a45177bbb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39a70ec48c46166418e72b026b73f0be, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7665,6 +7710,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2057561408}
     m_Modifications:
+    - target: {fileID: -9041531117694079289, guid: 81290f137a2d25c46a7125b709eeb7d9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 986126a700ed19748b834f4d3c7003cd, type: 2}
     - target: {fileID: -8679921383154817045, guid: 81290f137a2d25c46a7125b709eeb7d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -7730,6 +7780,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Office Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3336182266008515235, guid: 81290f137a2d25c46a7125b709eeb7d9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0644323273993849a082b934e1b342e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7887,6 +7942,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -9821,6 +9881,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -10866,6 +10931,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -11232,6 +11302,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name
@@ -11343,6 +11418,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 251c267fdba08dc48802ddf0c15291b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c50e2cd1a3a0ffc499d466d0c6139db4, type: 2}
     - target: {fileID: 919132149155446097, guid: 251c267fdba08dc48802ddf0c15291b6,
         type: 3}
       propertyPath: m_Name

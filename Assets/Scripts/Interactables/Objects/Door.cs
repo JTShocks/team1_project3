@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
-
-
+    [SerializeField] private string prompt;
+    public bool isLocked;
     [SerializeField] private KeyScanner keyScanner;
     private bool requireKeyScanner;
     public bool isOpen;
     [SerializeField] private bool isRotatingDoor;
     [SerializeField] private float speed = 1f;
-    public bool isLocked;
-    [SerializeField] private string prompt;
 
     [Header("Rotation Configs")]
     [SerializeField] private float rotationAmount = 90f;
@@ -22,11 +20,23 @@ public class Door : MonoBehaviour, IInteractable
     private Vector3 forward;
     private Coroutine animationCouroutine;
 
+    [SerializeField] bool isExitDoor;
+
+
+    AudioSource doorAudioSource;
+    [SerializeField] private AudioClip openDoorSound;
+    [SerializeField] private AudioClip closeDoorSound;
+    [SerializeField] private AudioClip lockedDoorSound;
+
+
+    public delegate void ExitDoor(string levelToGoTo);
+    public static ExitDoor OnExitDoorOpened;
 
     public string InteractionPrompt => prompt;
 
     void Awake()
     {
+        doorAudioSource = GetComponent<AudioSource>();
         startRotation = transform.rotation.eulerAngles;
         forward = transform.right;
         if(keyScanner == null)
@@ -83,7 +93,21 @@ public class Door : MonoBehaviour, IInteractable
         }
 
     }
-
+    void OpenDoor(Vector3 userPosition)
+    {
+        if(!isOpen)
+        {
+            if(animationCouroutine != null)
+            {
+                StopCoroutine(animationCouroutine);
+            }
+        }
+        if(isRotatingDoor)
+        {
+            float dot = Vector3.Dot(forward, (userPosition - transform.position).normalized);
+            animationCouroutine = StartCoroutine(DoRotationOpen(dot));
+        }
+    }
     private IEnumerator DoRotationOpen(float forwardAmount)
     {
         Quaternion startRotation = transform.rotation;
@@ -106,32 +130,38 @@ public class Door : MonoBehaviour, IInteractable
             yield return null;
             time += Time.deltaTime * speed;
         }
+        OnExitDoorOpened?.Invoke("MainMenu");
     }
-
-    void OpenDoor(Vector3 userPosition)
+    void CloseDoor()
     {
-        if(!isOpen)
+        if(isOpen)
         {
             if(animationCouroutine != null)
             {
                 StopCoroutine(animationCouroutine);
             }
+
+            if(isRotatingDoor)
+            {
+                animationCouroutine = StartCoroutine(DoRotationClose());
+            }
         }
-        if(isRotatingDoor)
-        {
-            float dot = Vector3.Dot(forward, (userPosition - transform.position).normalized);
-            animationCouroutine = StartCoroutine(DoRotationOpen(dot));
-        }
-        //Change the state to being open
-        Debug.Log("Door is now opening");
-        isOpen = true;
-        gameObject.SetActive(false);
     }
-    void CloseDoor()
+
+    private IEnumerator DoRotationClose()
     {
-        //Change the state to being closed
-        Debug.Log("Door is now closing");
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(this.startRotation);
+
         isOpen = false;
+
+        float time = 0;
+        while(time < 1)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            yield return null;
+            time += Time.deltaTime * speed;
+        }
     }
     void UnlockDoor(int scannerID)
     {

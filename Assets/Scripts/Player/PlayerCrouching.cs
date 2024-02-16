@@ -22,6 +22,8 @@ public class PlayerCrouching : MonoBehaviour
 
     bool isCrouching => standingHeight - currentHeight > .1f;
 
+    
+
     void Awake()
     {
         player = GetComponent<Player>();
@@ -84,6 +86,7 @@ public class PlayerCrouching : MonoBehaviour
         if(isCrouching)
         {
             player.movementSpeedMultiplier *= crouchSpeedMultiplier;
+            player.footstepAudio.volume = Mathf.Lerp(1, .5f, Time.deltaTime);
         }
 
     }

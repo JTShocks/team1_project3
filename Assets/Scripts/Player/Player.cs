@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,12 @@ public class Player : MonoBehaviour
     // Player has the camera and moves around
     // Need to get ref to the CharacterController
     [Header("Player Statistics and Values")]
-    [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float mass = 1f;
     [SerializeField] float acceleration = 20f;
     [SerializeField] float pushPower = 2.0f;
     public float throwPower = 10f;
     CharacterController playerController;
+
 
     public bool isGrounded => playerController.isGrounded;
     PlayerInput playerInput;
@@ -39,22 +40,25 @@ public class Player : MonoBehaviour
     public float playerMoveSpeed = 8f;
     public float movementSpeedMultiplier;
 
-    //Interactor interactor
+    internal AudioSource footstepAudio;
 
-    // What does the player need to be able to do?
-    //1. Move around
-    //2. Crouch (lower the camera and reduce the player hitbox)
-    //3. Interact with objects (use an outsider Interactor component)
-    //4. Pickup objects, then throw them in a direction
+    [SerializeField] GameObject crosshair;
 
-    // Start is called before the first frame update
+    //When the player makes it to the exit, the game should fade to white, then reset back to the main menu
+
+    // Main Menu > Level >if Game over < Reset level : else > do a white out and return to main menu
+
+    // NICE TO HAVE OPTIONS
+    // Settings menu to change sensitivity or remove the crosshair
+    //  Gives something a little bit extra for the teacher when playing and should be easy to implement
     void Awake()
     {
         playerController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["move"];
+        footstepAudio = GetComponent<AudioSource>();
 
-        //interactor = GetComponent<Interactor>();
+        crosshair.SetActive(PlayerPrefs.GetInt("crosshairEnabled") > 0); 
     }
 
     // Update is called once per frame
@@ -67,12 +71,25 @@ public class Player : MonoBehaviour
         }
         UpdateGravity();
         UpdateMovement();
+
+
+        var moveInput = moveAction.ReadValue<Vector2>();
+        if(moveInput.magnitude > 0 && playerController.isGrounded)
+        {
+            footstepAudio.enabled = true;
+        }
+        else
+        {
+            footstepAudio.enabled = false;
+        }
+
+
     }
 
     Vector3 GetMovementInput()
     {    
         var moveInput = moveAction.ReadValue<Vector2>();
-
+        //If the player is moving, enable the footsteps
 
         //Get the player input
         var input = new Vector3();
@@ -98,6 +115,7 @@ public class Player : MonoBehaviour
 
 
 
+
         //Calculate the rate the player should move each frame
         var factor = acceleration * Time.deltaTime;
         velocity.x = Mathf.Lerp(velocity.x, input.x, factor);
@@ -109,11 +127,6 @@ public class Player : MonoBehaviour
 
         playerController.Move(velocity * Time.deltaTime);
         
-    }
-
-    void UpdateLook()
-    {
-
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
