@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
 
     internal AudioSource footstepAudio;
 
+    [SerializeField] GameObject crosshair;
+
     //When the player makes it to the exit, the game should fade to white, then reset back to the main menu
 
     // Main Menu > Level >if Game over < Reset level : else > do a white out and return to main menu
@@ -54,6 +57,8 @@ public class Player : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["move"];
         footstepAudio = GetComponent<AudioSource>();
+
+        crosshair.SetActive(PlayerPrefs.GetInt("crosshairEnabled") > 0); 
     }
 
     // Update is called once per frame

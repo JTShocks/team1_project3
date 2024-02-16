@@ -291,7 +291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minViewDistance: 90
   playerBody: {fileID: 1893427731652029745}
-  mouseSensitivity: 1000
 --- !u!1 &4386574721534364229
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +308,7 @@ GameObject:
   - component: {fileID: 223222351922695737}
   - component: {fileID: 7798915330339727523}
   - component: {fileID: 5416274942486601149}
+  - component: {fileID: 5566873692255106092}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -462,6 +462,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 3965560255087893778}
   playerMoveSpeed: 10
   movementSpeedMultiplier: 0
+  crosshair: {fileID: 7647602477523542913}
 --- !u!114 &8278125150793373099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,6 +616,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4386574721534364229}
   m_Enabled: 1
+--- !u!114 &5566873692255106092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4386574721534364229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ba640884070344383b9881227b4e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5079870018429527133
 GameObject:
   m_ObjectHideFlags: 0
