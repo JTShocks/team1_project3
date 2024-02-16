@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.GlobalIllumination;
 
 
 public class EnemyBehaviour : MonoBehaviour
@@ -56,12 +57,15 @@ public class EnemyBehaviour : MonoBehaviour
     Collider enemyCollider;
     NavMeshAgent navMeshAgent;
     Vector3 lookTarget;
+
+    [SerializeField] private Light eyeLight;
     
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentMovespeed = baseMoveSpeed;
+        eyeLight = GetComponentInChildren<Light>();
         
         
 
@@ -143,15 +147,17 @@ public class EnemyBehaviour : MonoBehaviour
         switch(newState)
         {
             case EnemyState.Patrolling:
-
+            eyeLight.color = Color.yellow;
             break;
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
             PlayerSpotted?.Invoke();
+            eyeLight.color = new Color(1f,.5f,0);
 
             break;
             case EnemyState.Chase:
             searchTimer = 5f;
+            eyeLight.color = Color.red;
             break;
         }
         currentState = newState;
