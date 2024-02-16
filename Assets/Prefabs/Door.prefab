@@ -139,7 +139,7 @@ MonoBehaviour:
   isRotatingDoor: 1
   speed: 1
   rotationAmount: 90
-  forwardDirection: 1
+  forwardDirection: -1
   openDoorSound: {fileID: 0}
   closeDoorSound: {fileID: 0}
   lockedDoorSound: {fileID: 0}
