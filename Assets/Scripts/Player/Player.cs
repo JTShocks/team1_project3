@@ -68,13 +68,8 @@ public class Player : MonoBehaviour
         UpdateMovement();
 
 
-    }
-
-    Vector3 GetMovementInput()
-    {    
         var moveInput = moveAction.ReadValue<Vector2>();
-        //If the player is moving, enable the footsteps
-        if(moveInput.magnitude > 0)
+        if(moveInput.magnitude > 0 && playerController.isGrounded)
         {
             footstepAudio.enabled = true;
         }
@@ -82,6 +77,14 @@ public class Player : MonoBehaviour
         {
             footstepAudio.enabled = false;
         }
+
+
+    }
+
+    Vector3 GetMovementInput()
+    {    
+        var moveInput = moveAction.ReadValue<Vector2>();
+        //If the player is moving, enable the footsteps
 
         //Get the player input
         var input = new Vector3();
