@@ -20,12 +20,17 @@ public class Door : MonoBehaviour, IInteractable
     private Vector3 forward;
     private Coroutine animationCouroutine;
 
+    [SerializeField] bool isExitDoor;
+
 
     AudioSource doorAudioSource;
     [SerializeField] private AudioClip openDoorSound;
     [SerializeField] private AudioClip closeDoorSound;
     [SerializeField] private AudioClip lockedDoorSound;
 
+
+    public delegate void ExitDoor(string levelToGoTo);
+    public static ExitDoor OnExitDoorOpened;
 
     public string InteractionPrompt => prompt;
 
@@ -125,6 +130,7 @@ public class Door : MonoBehaviour, IInteractable
             yield return null;
             time += Time.deltaTime * speed;
         }
+        OnExitDoorOpened?.Invoke("MainMenu");
     }
     void CloseDoor()
     {

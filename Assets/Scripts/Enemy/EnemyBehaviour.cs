@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.GlobalIllumination;
 
 
 public class EnemyBehaviour : MonoBehaviour
@@ -56,13 +57,19 @@ public class EnemyBehaviour : MonoBehaviour
     Collider enemyCollider;
     NavMeshAgent navMeshAgent;
     Vector3 lookTarget;
-    
+
+    [SerializeField] private Light eyeLight;
+    AudioSource audioSource;
+    [SerializeField] AudioClip onPlayerSeen;
+    [SerializeField] AudioClip onPlayerChase;
+    [SerializeField] AudioClip onLosePlayer;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentMovespeed = baseMoveSpeed;
-        
+        eyeLight = GetComponentInChildren<Light>();
+        audioSource = GetComponent<AudioSource>();
         
 
         enemyCollider = GetComponent<Collider>();
@@ -143,15 +150,21 @@ public class EnemyBehaviour : MonoBehaviour
         switch(newState)
         {
             case EnemyState.Patrolling:
-
+            eyeLight.color = Color.yellow;
+            if(currentState == EnemyState.Chase)
+                PlaySound(onLosePlayer);
             break;
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
             PlayerSpotted?.Invoke();
+            eyeLight.color = new Color(1f,.5f,0);
+            PlaySound(onPlayerSeen);
 
             break;
             case EnemyState.Chase:
             searchTimer = 5f;
+            eyeLight.color = Color.red;
+            PlaySound(onPlayerChase);
             break;
         }
         currentState = newState;
@@ -217,6 +230,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
         playerIsInRange = false;
         return false;
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
 }

@@ -8,8 +8,14 @@ public class MouseLook : MonoBehaviour
     [SerializeField] float minViewDistance = 90f;
     [SerializeField] Transform playerBody;
 
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity => PlayerPrefs.GetFloat("MouseSensLevel", 1);
+
     float xRotation = 0f;
+
+    void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +26,8 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         //Get the input from the mouse
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity *Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity *Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * (mouseSensitivity*100) *Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * (mouseSensitivity*100) *Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, minViewDistance);
