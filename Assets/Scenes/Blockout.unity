@@ -6741,11 +6741,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start Door
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 86349a968b2a04647a53d45a45177bbb,
+        - target: {fileID: 3062256051733565589, guid: 86349a968b2a04647a53d45a45177bbb,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39a70ec48c46166418e72b026b73f0be, type: 2}
 
     m_RemovedComponents: []
     m_RemovedGameObjects: []
