@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/bleh.meta
+guid: 6317cb2bae91d5c498c5e2dae2428e46
+folderAsset: yes
+========
 guid: f0ded41a4a26afe4d97d77ca0263cb90
+>>>>>>>> main:Assets/Scenes/Debug_level.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 361191435288978436}
   - component: {fileID: 1324933390010693318}
   - component: {fileID: 3115558968739460056}
+  - component: {fileID: 3921935376661021693}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   - {fileID: 6013358373315824521}
   - {fileID: 3712964050073045496}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1709042513708353988
 MonoBehaviour:
@@ -69,9 +70,9 @@ MonoBehaviour:
   isStunned: 0
   stunnedTimer: 3
   eyeLight: {fileID: 0}
-  onPlayerSeen: {fileID: 0}
-  onPlayerChase: {fileID: 0}
-  onLosePlayer: {fileID: 0}
+  onPlayerSeen: {fileID: 8300000, guid: a630ca55f0d1a3f499162782bcdb7a9d, type: 3}
+  onPlayerChase: {fileID: 8300000, guid: 06aa94666b6a40843ab7ae649c3ea57e, type: 3}
+  onLosePlayer: {fileID: 8300000, guid: ba721eec3261f0543a6fa79536f706a6, type: 3}
 --- !u!54 &6345874676196856216
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,7 +156,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -240,6 +241,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &3921935376661021693
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3606349267509535577}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ecf57fc026b4db849825f81f1861f353, type: 3}
+  m_Controller: {fileID: 9100000, guid: 33a45030d3402de4eb8349d695384e41, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3931146350783009588
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +641,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7823293702887809713, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2276f80f0edb8ae4bb7e2d297f4a179b, type: 2}
     - target: {fileID: -7411133718862237558, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
@@ -729,6 +756,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1527620471906900861, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dedd4d618668fd94b860d3a070c7af33, type: 2}
+    - target: {fileID: 1630794972795428178, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aaa60f62459a89044932d569e006834d, type: 2}
     - target: {fileID: 2694041487934845857, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
@@ -744,6 +781,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3247327905825708479, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f80a62376dcecd43822fa00c2587ed3, type: 2}
     - target: {fileID: 3287454155171837430, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
@@ -789,7 +831,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: ecf57fc026b4db849825f81f1861f353, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

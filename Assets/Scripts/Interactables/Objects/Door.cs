@@ -130,7 +130,11 @@ public class Door : MonoBehaviour, IInteractable
             yield return null;
             time += Time.deltaTime * speed;
         }
+        if(isExitDoor)
+        {
         OnExitDoorOpened?.Invoke("MainMenu");
+        }
+
     }
     void CloseDoor()
     {

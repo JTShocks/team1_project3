@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a9b913c1bf5004c86b2d6edb19a728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: Press E to Open
+  prompt: Press E to Interact
   isLocked: 0
   keyScanner: {fileID: 0}
   isOpen: 0

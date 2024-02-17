@@ -27,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
     public event Action PlayerSpotted;
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float baseMoveSpeed = 5f;
+    [SerializeField] private float chaseSpeed;
     float currentMovespeed;
     [SerializeField] private EnemyState currentState;
     [SerializeField] public Player player;
@@ -57,6 +58,7 @@ public class EnemyBehaviour : MonoBehaviour
     Collider enemyCollider;
     NavMeshAgent navMeshAgent;
     Vector3 lookTarget;
+    Animator animator;
 
     [SerializeField] private Light eyeLight;
     AudioSource audioSource;
@@ -70,7 +72,7 @@ public class EnemyBehaviour : MonoBehaviour
         currentMovespeed = baseMoveSpeed;
         eyeLight = GetComponentInChildren<Light>();
         audioSource = GetComponent<AudioSource>();
-        
+        animator = GetComponent<Animator>();
 
         enemyCollider = GetComponent<Collider>();
         //Initial position of first waypoint
@@ -79,7 +81,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         //Set the next waypoint target
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-        ChangeEnemyState(EnemyState.Patrolling);
+        //ChangeEnemyState(EnemyState.Patrolling);
     }
 
     // Update is called once per frame
@@ -114,6 +116,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if(playerIsSeen && currentAwareness < maxAwareness)
                 {
                     ChangeAwareness(30);
+
                 }
             }
 
@@ -122,7 +125,6 @@ public class EnemyBehaviour : MonoBehaviour
                     //If the enemy cannot see the player, then lower the awareness over time until it reaches 0
                     ChangeAwareness(-30);
                 }
-
             break;
             case EnemyState.Chase:
                 Debug.Log("Enemy is now chasing the player");
@@ -151,20 +153,26 @@ public class EnemyBehaviour : MonoBehaviour
         {
             case EnemyState.Patrolling:
             eyeLight.color = Color.yellow;
+            currentMovespeed = baseMoveSpeed;
             if(currentState == EnemyState.Chase)
+                animator.SetTrigger("losePlayer");
                 PlaySound(onLosePlayer);
             break;
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
             PlayerSpotted?.Invoke();
+            currentMovespeed = 0;
+            animator.SetTrigger("playerSpotted");
             eyeLight.color = new Color(1f,.5f,0);
             PlaySound(onPlayerSeen);
 
             break;
             case EnemyState.Chase:
+            currentMovespeed = chaseSpeed;
             searchTimer = 5f;
             eyeLight.color = Color.red;
             PlaySound(onPlayerChase);
+            animator.SetTrigger("enterChase");
             break;
         }
         currentState = newState;
