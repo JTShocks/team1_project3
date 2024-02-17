@@ -7117,6 +7117,7 @@ GameObject:
   - component: {fileID: 1138511019}
   - component: {fileID: 1138511021}
   - component: {fileID: 1138511020}
+  - component: {fileID: 1138511022}
   m_Layer: 0
   m_Name: e (4)
   m_TagString: Untagged
@@ -7224,6 +7225,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1138511022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138511018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af93a510c43246243a4a62bd8a4acdf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickeringInterval: 2
+  whenToFlickerTime: 0.05
+  offTime: 0.1
+  numberOfFlickers: 2
 --- !u!1 &1150771668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8126575363595136504, guid: 81290f137a2d25c46a7125b709eeb7d9,
@@ -7548,7 +7565,7 @@ PrefabInstance:
     - target: {fileID: 2347821560425813433, guid: 19ea60762308f9548bf081d281f6a44a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.01
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 2347821560425813433, guid: 19ea60762308f9548bf081d281f6a44a,
         type: 3}
@@ -13089,6 +13106,7 @@ GameObject:
   - component: {fileID: 2132186037}
   - component: {fileID: 2132186039}
   - component: {fileID: 2132186038}
+  - component: {fileID: 2132186040}
   m_Layer: 0
   m_Name: e (3)
   m_TagString: Untagged
@@ -13196,6 +13214,22 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2132186040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132186036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af93a510c43246243a4a62bd8a4acdf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickeringInterval: 5
+  whenToFlickerTime: 0.02
+  offTime: 0.15
+  numberOfFlickers: 3
 --- !u!1001 &2134495630
 PrefabInstance:
   m_ObjectHideFlags: 0
