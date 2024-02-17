@@ -2199,6 +2199,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5532724489865120643, guid: 19ea60762308f9548bf081d281f6a44a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6672104601715032714, guid: 19ea60762308f9548bf081d281f6a44a,
         type: 3}
       propertyPath: prompt
@@ -8632,6 +8637,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532724489865120643, guid: 19ea60762308f9548bf081d281f6a44a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6672104601715032714, guid: 19ea60762308f9548bf081d281f6a44a,
         type: 3}
