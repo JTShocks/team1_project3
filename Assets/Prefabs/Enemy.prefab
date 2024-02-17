@@ -619,6 +619,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7823293702887809713, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2276f80f0edb8ae4bb7e2d297f4a179b, type: 2}
     - target: {fileID: -7411133718862237558, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
@@ -729,6 +734,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1527620471906900861, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dedd4d618668fd94b860d3a070c7af33, type: 2}
+    - target: {fileID: 1630794972795428178, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aaa60f62459a89044932d569e006834d, type: 2}
     - target: {fileID: 2694041487934845857, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
@@ -744,6 +759,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3247327905825708479, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f80a62376dcecd43822fa00c2587ed3, type: 2}
     - target: {fileID: 3287454155171837430, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Layer
