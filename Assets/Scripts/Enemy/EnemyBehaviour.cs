@@ -81,7 +81,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         //Set the next waypoint target
         currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
-        ChangeEnemyState(EnemyState.Patrolling);
+        //ChangeEnemyState(EnemyState.Patrolling);
     }
 
     // Update is called once per frame
