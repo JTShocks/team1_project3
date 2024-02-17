@@ -8728,6 +8728,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1291910562935304042, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2276f80f0edb8ae4bb7e2d297f4a179b, type: 2}
+    - target: {fileID: 1450833627954933623, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aaa60f62459a89044932d569e006834d, type: 2}
+    - target: {fileID: 1707120058354313560, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dedd4d618668fd94b860d3a070c7af33, type: 2}
     - target: {fileID: 1709042513708353988, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
       propertyPath: player
@@ -8748,6 +8763,11 @@ PrefabInstance:
       propertyPath: currentState
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3428094299319004058, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f80a62376dcecd43822fa00c2587ed3, type: 2}
     - target: {fileID: 3606349267509535577, guid: 6fbd240abb2c0c141866a6ff0f2476fe,
         type: 3}
       propertyPath: m_Name
@@ -9807,11 +9827,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7823293702887809713, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2276f80f0edb8ae4bb7e2d297f4a179b, type: 2}
     - target: {fileID: 919132149155446097, guid: ecf57fc026b4db849825f81f1861f353,
         type: 3}
       propertyPath: m_Name
       value: NurseGuards
       objectReference: {fileID: 0}
+    - target: {fileID: 1527620471906900861, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dedd4d618668fd94b860d3a070c7af33, type: 2}
+    - target: {fileID: 1630794972795428178, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aaa60f62459a89044932d569e006834d, type: 2}
+    - target: {fileID: 3247327905825708479, guid: ecf57fc026b4db849825f81f1861f353,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f80a62376dcecd43822fa00c2587ed3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -1478033044991196454, guid: ecf57fc026b4db849825f81f1861f353, type: 3}
