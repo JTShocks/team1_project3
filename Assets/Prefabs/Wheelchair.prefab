@@ -101,6 +101,9 @@ MonoBehaviour:
   isPickedUp: 0
   isBeingThrown: 0
   stunAmount: 3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!208 &6578711079836325646
 NavMeshObstacle:
   m_ObjectHideFlags: 0
