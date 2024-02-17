@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Threading;
+using System;
 
 public class Interactor : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class Interactor : MonoBehaviour
 
     bool isTryingToInteract;
 
+    PhysicsObject objectInHands;
+
+    public delegate void ThrowObject(Vector3 direction, float force);
+    public static ThrowObject OnThrowObject;
+
     void Awake()
     {
         player = GetComponent<Player>();
@@ -49,23 +55,16 @@ public class Interactor : MonoBehaviour
             var interactable = hit.collider.GetComponent<IInteractable>();
 
             var physicsObject = hit.collider.GetComponent<PhysicsObject>();
-            //handsAreFull = physicsObject.isPickedUp;
+            if(physicsObject != null)
+            {
+                handsAreFull = physicsObject.isPickedUp;
+            }
             if(interactable != null)
             {
                 ChangeInteractText(interactable.InteractionPrompt);
                 if(isTryingToInteract)
                 {
                     interactable.Interact(this);
-
-
-                }
-
-                if(isTryingToFire)
-                {
-                    if(physicsObject != null)
-                    {
-                        physicsObject.ThrowObject(interactionPoint.forward, player.throwPower);
-                    }
                 }
             }
             else
@@ -81,6 +80,11 @@ public class Interactor : MonoBehaviour
         else
         {
             ChangeInteractText("");
+        }
+
+        if(isTryingToFire)
+        {
+            OnThrowObject?.Invoke(interactionPoint.forward, player.throwPower);
         }
     }
 
