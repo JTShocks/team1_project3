@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,6 +40,10 @@ public class Player : MonoBehaviour
     public float playerMoveSpeed = 8f;
     public float movementSpeedMultiplier;
 
+    internal AudioSource footstepAudio;
+
+    [SerializeField] GameObject crosshair;
+
     //When the player makes it to the exit, the game should fade to white, then reset back to the main menu
 
     // Main Menu > Level >if Game over < Reset level : else > do a white out and return to main menu
@@ -51,6 +56,9 @@ public class Player : MonoBehaviour
         playerController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["move"];
+        footstepAudio = GetComponent<AudioSource>();
+
+        crosshair.SetActive(PlayerPrefs.GetInt("crosshairEnabled") > 0); 
     }
 
     // Update is called once per frame
@@ -63,12 +71,25 @@ public class Player : MonoBehaviour
         }
         UpdateGravity();
         UpdateMovement();
+
+
+        var moveInput = moveAction.ReadValue<Vector2>();
+        if(moveInput.magnitude > 0 && playerController.isGrounded)
+        {
+            footstepAudio.enabled = true;
+        }
+        else
+        {
+            footstepAudio.enabled = false;
+        }
+
+
     }
 
     Vector3 GetMovementInput()
     {    
         var moveInput = moveAction.ReadValue<Vector2>();
-
+        //If the player is moving, enable the footsteps
 
         //Get the player input
         var input = new Vector3();
@@ -91,6 +112,7 @@ public class Player : MonoBehaviour
         //Check to see if anything should happen before moving
         OnBeforeMove?.Invoke();
         var input = GetMovementInput();
+
 
 
 
