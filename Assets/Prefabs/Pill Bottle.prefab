@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2653188228927981525}
   - {fileID: 849827920218112339}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8676730850779188289
 Rigidbody:
@@ -79,7 +79,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   isPickedUp: 0
   isBeingThrown: 0
-  stunAmount: 3
+  stunAmount: 2
 --- !u!136 &5946443097323388120
 CapsuleCollider:
   m_ObjectHideFlags: 0
