@@ -64,9 +64,9 @@ MonoBehaviour:
   distanceThreshold: 0.2
   currentAwareness: 0
   maxAwareness: 100
-  searchTimer: 5
-  awarenessGainPerSecond: 10
-  awarenessLosePerSecond: 10
+  searchTimer: 2
+  awarenessGainPerSecond: 50
+  awarenessLosePerSecond: 5
   enemyViewAngle: 0
   playerIsSeen: 0
   playerIsInRange: 0
