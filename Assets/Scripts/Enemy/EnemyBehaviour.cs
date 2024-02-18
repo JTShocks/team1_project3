@@ -100,7 +100,11 @@ public class EnemyBehaviour : MonoBehaviour
             Door door = hit.collider.GetComponent<Door>();
             if(door != null)
             {
-                door.OpenDoor(transform.position);
+                if(!door.isOpen)
+                {
+                    door.OpenDoor(transform.position);
+                }
+
             }
         }
 
@@ -157,7 +161,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     currentMovespeed = baseMoveSpeed;
                     isStunned = false;
-                    ChangeEnemyState(EnemyState.Alert);
+                    ChangeEnemyState(EnemyState.Patrolling);
 
                 }
             }
