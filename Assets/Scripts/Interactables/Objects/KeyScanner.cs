@@ -12,10 +12,18 @@ public class KeyScanner : MonoBehaviour
 
     public int keyIDToCheck;
 
+    [SerializeField] AudioClip scanClip;
+    AudioSource audioSource;
+
     [SerializeField] private bool scannerActivated = false;
     public event Action<int> OnKeyScanned;
 
     [SerializeField] private GameObject keyToScan;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider collider)
     {
         if(scannerActivated)
@@ -29,6 +37,7 @@ public class KeyScanner : MonoBehaviour
             //The key scanner should be active & send event to the listeners
             OnKeyScanned?.Invoke(scannerID);
             Debug.Log("Scanner has activated");
+            audioSource.PlayOneShot(scanClip);
             scannerActivated = true;
         }
         else
