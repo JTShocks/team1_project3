@@ -54,7 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: {fileID: 0}
-  baseMoveSpeed: 5
+  baseMoveSpeed: 3
+  chaseSpeed: 7
   currentState: 1
   player: {fileID: 0}
   playerMask:
