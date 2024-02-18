@@ -20,7 +20,7 @@ public class Door : MonoBehaviour, IInteractable
     private Vector3 forward;
     private Coroutine animationCouroutine;
 
-    [SerializeField] bool isExitDoor;
+    [SerializeField] internal bool isExitDoor;
 
 
     AudioSource audioSource;
@@ -94,7 +94,7 @@ public class Door : MonoBehaviour, IInteractable
         }
 
     }
-    void OpenDoor(Vector3 userPosition)
+    public void OpenDoor(Vector3 userPosition)
     {
         PlaySound(openDoorSound);
         if(!isOpen)
