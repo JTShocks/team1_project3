@@ -167,25 +167,25 @@ public class EnemyBehaviour : MonoBehaviour
             case EnemyState.Patrolling:
             eyeLight.color = Color.yellow;
             currentMovespeed = baseMoveSpeed;
-            if(currentState == EnemyState.Chase)
+            if(currentState == EnemyState.Chase || currentState == EnemyState.Alert)
                 animator.SetTrigger("losePlayer");
                 PlaySound(onLosePlayer);
+            
             break;
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
-            PlayerSpotted?.Invoke();
-            currentMovespeed = 0;
-            animator.SetTrigger("playerSpotted");
-            eyeLight.color = new Color(1f,.5f,0);
-            PlaySound(onPlayerSeen);
+                PlayerSpotted?.Invoke();
+                animator.SetTrigger("playerSpotted");
+                eyeLight.color = new Color(1f,.5f,0);
+                PlaySound(onPlayerSeen);
 
             break;
             case EnemyState.Chase:
-            currentMovespeed = chaseSpeed;
-            searchTimer = 5f;
-            eyeLight.color = Color.red;
-            PlaySound(onPlayerChase);
-            animator.SetTrigger("enterChase");
+                currentMovespeed = chaseSpeed;
+                searchTimer = 5f;
+                eyeLight.color = Color.red;
+                PlaySound(onPlayerChase);
+                animator.SetTrigger("enterChase");
             break;
             case EnemyState.Stunned:
                 PlaySound(onStunned);
