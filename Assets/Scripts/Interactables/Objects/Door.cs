@@ -11,6 +11,7 @@ public class Door : MonoBehaviour, IInteractable
     private bool requireKeyScanner;
     public bool isOpen;
     [SerializeField] private bool isRotatingDoor;
+    [SerializeField] string sceneToLoadOnExit;
     [SerializeField] private float speed = 1f;
 
     [Header("Rotation Configs")]
@@ -134,7 +135,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         if(isExitDoor)
         {
-        OnExitDoorOpened?.Invoke("MainMenu");
+        OnExitDoorOpened?.Invoke(sceneToLoadOnExit);
         }
 
     }
