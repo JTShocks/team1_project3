@@ -64,35 +64,39 @@ public class Interactor : MonoBehaviour
         {
             ChangeInteractText("");
         }
-        if(isTryingToInteract)
+        if(isTryingToInteract) //If the player is interacting
         {
-            if(heldObject == null)
+            if(heldObject == null) //If they are not holding an object
             {
                 RaycastHit hit;
                 if(Physics.Raycast(interactionPoint.position, interactionPoint.forward,out hit, interactionPointDistance, interactionMask))
                 {
+                    //If they hit an object on the interactable layer
                     IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                     if(interactable != null)
                     {
 
                         if(hit.collider.CompareTag("Item"))
                         {
+                            //If it is an item, pick it up
                             PickupObject(hit.transform.gameObject);
                         } 
-
-                            interactable.Interact(this);
+                        //Interact with the object
+                        interactable.Interact(this);
                         
                     }
                 }
             }
             else
             {
+                //Let go of the object if they interact and ARE holding something
                 DropObject();
             }
         }
 
         if(heldObject != null)
         {
+            //Set the text to disappear
             ChangeInteractText("");
         }
 
@@ -100,59 +104,15 @@ public class Interactor : MonoBehaviour
         {
             if(heldObject != null)
             {
+                //Throw the object 
                 ThrowObject(interactionPoint.forward, player.throwPower);
             }
         }
-        //Find everything in the ray that is part of the interactable mask
-        /*if(Physics.Raycast(interactionPoint.position, interactionPoint.forward,out hit, interactionPointDistance, interactionMask))
-        {
-            var interactable = hit.collider.GetComponent<IInteractable>();
-
-            if(interactable != null)
-            {
-                GameObject pickedObj = 
-                ChangeInteractText(interactable.InteractionPrompt);
-                if(isTryingToInteract)
-                {
-                    if(heldObject == null)
-                    {
-                        PickupObject(pickedObj);
-                    }
-                    else
-                    {
-
-                        DropObject();
-                    }
-
-
-                }
-
-                
-            }
-            else
-            {
-                ChangeInteractText("");
-            }
-
-            if(heldObject != null)
-            {
-                interactText.text = "";
-            }
-        }
-        else
-        {
-            ChangeInteractText("");
-        }
-
-        if(isTryingToFire && heldObject != null)
-        {
-            ThrowObject(transform.forward, player.throwPower);
-        }*/
+        
     }
 
     public void FixedUpdate()
     {
-
         if(heldObject != null)
         {
             Vector3 directionToHoldPos = (interactionPoint.position - objectInHandsRB.transform.position).normalized;
