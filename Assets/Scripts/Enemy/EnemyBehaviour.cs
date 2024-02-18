@@ -187,7 +187,7 @@ public class EnemyBehaviour : MonoBehaviour
             case EnemyState.Alert:
             //Invoke the event when the player is spotted
                 PlayerSpotted?.Invoke();
-                animator.SetTrigger("playerSpotted");
+                //animator.SetTrigger("playerSpotted");
                 eyeLight.color = new Color(1f,.5f,0);
                 PlaySound(onPlayerSeen);
 
@@ -201,6 +201,7 @@ public class EnemyBehaviour : MonoBehaviour
             break;
             case EnemyState.Stunned:
                 PlaySound(onStunned);
+                animator.SetTrigger("becomeStunned");
                 isStunned = true;
             break;
         }

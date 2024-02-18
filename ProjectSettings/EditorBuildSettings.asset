@@ -14,10 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Blockout.unity
     guid: 2249b75987b963947ba6fe8d8abe41e0
-  - enabled: 0
-    path: Assets/Scenes/mainMenu_backdrop.unity
-    guid: e925f9615065fcc4b9feb18a4e4e3554
+  - enabled: 1
+    path: Assets/Scenes/winscreen.unity
+    guid: 6efcc9afddffacf4eb464c6854fb8013
   - enabled: 1
     path: Assets/Scenes/Level_BackDrop.unity
     guid: 0ae1866f4ff6bcc47bfeee7f4766bc6e
+  - enabled: 0
+    path: Assets/Scenes/mainMenu_backdrop.unity
+    guid: e925f9615065fcc4b9feb18a4e4e3554
   m_configObjects: {}
