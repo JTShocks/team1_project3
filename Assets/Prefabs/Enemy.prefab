@@ -65,15 +65,19 @@ MonoBehaviour:
   currentAwareness: 0
   maxAwareness: 100
   searchTimer: 5
+  awarenessGainPerSecond: 10
+  awarenessLosePerSecond: 10
   enemyViewAngle: 0
   playerIsSeen: 0
   playerIsInRange: 0
   isStunned: 0
   stunnedTimer: 3
   eyeLight: {fileID: 0}
-  onPlayerSeen: {fileID: 8300000, guid: a630ca55f0d1a3f499162782bcdb7a9d, type: 3}
-  onPlayerChase: {fileID: 8300000, guid: 06aa94666b6a40843ab7ae649c3ea57e, type: 3}
-  onLosePlayer: {fileID: 8300000, guid: ba721eec3261f0543a6fa79536f706a6, type: 3}
+  audioSource: {fileID: 0}
+  onPlayerSeen: {fileID: 8300000, guid: 505164f06c62c164a888298a3ebc1e52, type: 3}
+  onStunned: {fileID: 8300000, guid: 60d7be0071d02cd4584f776ae668acf5, type: 3}
+  onPlayerChase: {fileID: 8300000, guid: cfa8c786d570808408b318b2b0d669db, type: 3}
+  onLosePlayer: {fileID: 8300000, guid: ae2ad27b8bda52449820b88a281aba0d, type: 3}
 --- !u!54 &6345874676196856216
 Rigidbody:
   m_ObjectHideFlags: 0
