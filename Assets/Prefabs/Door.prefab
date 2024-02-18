@@ -118,7 +118,7 @@ Transform:
   - {fileID: 5654114196627283659}
   - {fileID: 6029635119780763455}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6672104601715032714
 MonoBehaviour:
@@ -140,9 +140,10 @@ MonoBehaviour:
   speed: 1
   rotationAmount: 90
   forwardDirection: 1
-  openDoorSound: {fileID: 0}
-  closeDoorSound: {fileID: 0}
-  lockedDoorSound: {fileID: 0}
+  isExitDoor: 0
+  openDoorSound: {fileID: 8300000, guid: 47babeb685543294887b921acf3794cb, type: 3}
+  closeDoorSound: {fileID: 8300000, guid: a1a2fb0b6ce4f0b4b9ecf58bf239fdd3, type: 3}
+  lockedDoorSound: {fileID: 8300000, guid: 760f54227d348ce4b94ee425f0f45e2a, type: 3}
 --- !u!54 &3102475533506535756
 Rigidbody:
   m_ObjectHideFlags: 0

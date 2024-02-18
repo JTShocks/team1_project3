@@ -45,6 +45,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
         {
             enemy.stunnedTimer = stunAmount;
             enemy.isStunned = true;
+            enemy.PlaySound(enemy.onStunned);
 
             
         }

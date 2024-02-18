@@ -12,7 +12,8 @@ public class EnemyBehaviour : MonoBehaviour
         Idle,
         Patrolling,
         Alert,
-        Chase
+        Chase,
+        Stunned
     }
 
     //What is in the enemy behaviour?
@@ -47,6 +48,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     internal float timeLastSawPlayer;
     [SerializeField] float searchTimer = 5f;
+    [SerializeField] float awarenessGainPerSecond;
+    [SerializeField] float awarenessLosePerSecond;
 
     [SerializeField] internal float enemyViewAngle = .3f;
 
@@ -61,8 +64,9 @@ public class EnemyBehaviour : MonoBehaviour
     Animator animator;
 
     [SerializeField] private Light eyeLight;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     [SerializeField] AudioClip onPlayerSeen;
+    [SerializeField] internal AudioClip onStunned;
     [SerializeField] AudioClip onPlayerChase;
     [SerializeField] AudioClip onLosePlayer;
     void Awake()
@@ -97,6 +101,7 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 currentMovespeed = baseMoveSpeed;
                 isStunned = false;
+
             }
         }
 
@@ -115,7 +120,8 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 if(playerIsSeen && currentAwareness < maxAwareness)
                 {
-                    ChangeAwareness(30);
+                    ChangeAwareness(awarenessGainPerSecond);
+                    navMeshAgent.SetDestination(player.transform.position);
 
                 }
             }
@@ -123,7 +129,7 @@ public class EnemyBehaviour : MonoBehaviour
                 if(!playerIsSeen && currentAwareness > 0)
                 {
                     //If the enemy cannot see the player, then lower the awareness over time until it reaches 0
-                    ChangeAwareness(-30);
+                    ChangeAwareness(-awarenessLosePerSecond);
                 }
             break;
             case EnemyState.Chase:
@@ -240,7 +246,7 @@ public class EnemyBehaviour : MonoBehaviour
         return false;
     }
 
-    void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
     }
