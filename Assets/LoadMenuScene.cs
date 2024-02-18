@@ -11,6 +11,15 @@ public class LoadMenuScene : MonoBehaviour
         LoadBackgroundScene();
         Cursor.lockState = CursorLockMode.None;
     }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+    
     
     // Start is called before the first frame update
     void LoadBackgroundScene()
