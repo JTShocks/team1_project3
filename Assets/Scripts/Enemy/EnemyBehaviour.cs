@@ -93,17 +93,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         navMeshAgent.speed = currentMovespeed;
         playerIsSeen = CheckLineOfSight();
-        if(isStunned)
-        {
-            currentMovespeed = 0;
-            stunnedTimer -= Time.deltaTime;
-            if(stunnedTimer <= 0)
-            {
-                currentMovespeed = baseMoveSpeed;
-                isStunned = false;
-
-            }
-        }
+        
 
         switch(currentState)
         {
@@ -149,12 +139,29 @@ public class EnemyBehaviour : MonoBehaviour
                     }
                 }
             break;
+            case EnemyState.Stunned:
+                if(isStunned)
+            {
+                currentMovespeed = 0;
+                stunnedTimer -= Time.deltaTime;
+                if(stunnedTimer <= 0)
+                {
+                    currentMovespeed = baseMoveSpeed;
+                    isStunned = false;
+                    ChangeEnemyState(EnemyState.Alert);
+
+                }
+            }
+            break;
         } 
     }
 
-    void ChangeEnemyState(EnemyState newState)
+    public void ChangeEnemyState(EnemyState newState)
     {
-
+        if(newState == currentState)
+        {
+            return;
+        }
         switch(newState)
         {
             case EnemyState.Patrolling:
@@ -179,6 +186,10 @@ public class EnemyBehaviour : MonoBehaviour
             eyeLight.color = Color.red;
             PlaySound(onPlayerChase);
             animator.SetTrigger("enterChase");
+            break;
+            case EnemyState.Stunned:
+                PlaySound(onStunned);
+                isStunned = true;
             break;
         }
         currentState = newState;

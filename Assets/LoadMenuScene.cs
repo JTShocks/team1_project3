@@ -9,6 +9,7 @@ public class LoadMenuScene : MonoBehaviour
     void Awake()
     {
         LoadBackgroundScene();
+        Cursor.lockState = CursorLockMode.None;
     }
     
     // Start is called before the first frame update
