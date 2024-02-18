@@ -94,7 +94,7 @@ public class Door : MonoBehaviour, IInteractable
         }
 
     }
-    void OpenDoor(Vector3 userPosition)
+    public void OpenDoor(Vector3 userPosition)
     {
         PlaySound(openDoorSound);
         if(!isOpen)
