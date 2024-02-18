@@ -24,6 +24,6 @@ public class LoadMenuScene : MonoBehaviour
     // Start is called before the first frame update
     void LoadBackgroundScene()
     {
-        SceneManager.LoadScene("mainMenu_backdrop", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Level_BackDrop", LoadSceneMode.Additive);
     }
 }

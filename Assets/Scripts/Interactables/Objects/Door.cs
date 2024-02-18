@@ -23,7 +23,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] bool isExitDoor;
 
 
-    AudioSource doorAudioSource;
+    AudioSource audioSource;
     [SerializeField] private AudioClip openDoorSound;
     [SerializeField] private AudioClip closeDoorSound;
     [SerializeField] private AudioClip lockedDoorSound;
@@ -36,7 +36,7 @@ public class Door : MonoBehaviour, IInteractable
 
     void Awake()
     {
-        doorAudioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         startRotation = transform.rotation.eulerAngles;
         forward = transform.right;
         if(keyScanner == null)
@@ -79,6 +79,7 @@ public class Door : MonoBehaviour, IInteractable
         if(isLocked)
         {
             Debug.Log("The door is locked.");
+            PlaySound(lockedDoorSound);
             return false;
         }
         if(isOpen)
@@ -95,6 +96,7 @@ public class Door : MonoBehaviour, IInteractable
     }
     void OpenDoor(Vector3 userPosition)
     {
+        PlaySound(openDoorSound);
         if(!isOpen)
         {
             if(animationCouroutine != null)
@@ -138,6 +140,7 @@ public class Door : MonoBehaviour, IInteractable
     }
     void CloseDoor()
     {
+        PlaySound(closeDoorSound);
         if(isOpen)
         {
             if(animationCouroutine != null)
@@ -174,6 +177,11 @@ public class Door : MonoBehaviour, IInteractable
             Debug.Log("Door has been unlocked.");
             isLocked = false;
         }
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
 }
