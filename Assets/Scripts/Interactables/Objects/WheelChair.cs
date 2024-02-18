@@ -24,9 +24,9 @@ public class WheelChair : PhysicsObject
         return true;
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         RaycastHit hit;
         if(Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, whatIsGround))
         {
@@ -35,8 +35,15 @@ public class WheelChair : PhysicsObject
 
         if(isPickedUp)
         {
-            rb.velocity = Vector3.zero;
-            transform.position = new Vector3(transform.position.x,groundPosition.y,transform.position.z);
+            Vector3 directionToHoldPos = (holdPosition- rb.transform.position).normalized;
+            Vector3 holdForce = directionToHoldPos * .5f;
+            float distanceToHoldPos = Vector3.Distance(rb.transform.position, holdPosition);
+            distanceToHoldPos = Mathf.Clamp(distanceToHoldPos, 0.0f, 1.0f);
+            holdForce *= distanceToHoldPos;
+
+            rb.AddForce(holdForce, ForceMode.VelocityChange);
+            //rb.velocity = Vector3.zero;
+            //transform.position = new Vector3(transform.position.x,groundPosition.y,transform.position.z);
         }
     }
 
@@ -48,6 +55,7 @@ public class WheelChair : PhysicsObject
 
     void AlignChair(Transform interactor)
     {
+        holdPosition = new Vector3(interactor.position.x, groundPosition.y, interactor.position.z);
         transform.parent = interactor;
         rb.velocity = Vector3.zero;
         rb.useGravity = false;

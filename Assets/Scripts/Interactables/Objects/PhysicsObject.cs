@@ -11,6 +11,8 @@ public class PhysicsObject : MonoBehaviour, IInteractable
     public bool isPickedUp;
     public bool isBeingThrown;
     [SerializeField] float stunAmount;
+
+    Vector3 itemPlacePosition;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -18,19 +20,21 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 
     void OnEnable()
     {
-        Interactor.OnThrowObject += ThrowObject;
+        //Interactor.OnThrowObject += ThrowObject;
     }
     void OnDisable()
     {
-        Interactor.OnThrowObject -= ThrowObject;
+        //Interactor.OnThrowObject -= ThrowObject;
     }
 
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
         isBeingThrown = rb.velocity.magnitude > .5;
         if(isPickedUp)
         {
+            //rb.velocity = Vector3.zero;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
+                
             //transform.localPosition = Vector3.forward;
         }
     }
@@ -54,6 +58,7 @@ public class PhysicsObject : MonoBehaviour, IInteractable
 
     public virtual bool Interact(Interactor interactor)
     {
+        /*
         if(isPickedUp)
         {
             DropObject();
@@ -61,17 +66,20 @@ public class PhysicsObject : MonoBehaviour, IInteractable
         else
         {
             PickupObject(interactor.interactionPoint.transform);
-        }
+        }*/
          return true;
     }
 
     void PickupObject(Transform holdPosition)
     {
         //This is the function where you pickup the items
-        rb.velocity = Vector3.zero; //Stop all velocity on the object when picked up
-        rb.useGravity = false;
-        rb.isKinematic = true;
-        transform.parent = holdPosition;
+        //Stop all velocity on the object when picked up
+        //rb.useGravity = false;
+        //rb.isKinematic = true;
+        //transform.parent = holdPosition;
+        itemPlacePosition = holdPosition.position;
+
+
         isPickedUp = true;
 
     }
