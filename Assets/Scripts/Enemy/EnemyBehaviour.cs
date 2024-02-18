@@ -94,6 +94,19 @@ public class EnemyBehaviour : MonoBehaviour
         navMeshAgent.speed = currentMovespeed;
         playerIsSeen = CheckLineOfSight();
         
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 3f))
+        {
+            Door door = hit.collider.GetComponent<Door>();
+            if(door != null)
+            {
+                if(!door.isOpen)
+                {
+                    door.OpenDoor(transform.position);
+                }
+
+            }
+        }
 
         switch(currentState)
         {
@@ -148,7 +161,7 @@ public class EnemyBehaviour : MonoBehaviour
                 {
                     currentMovespeed = baseMoveSpeed;
                     isStunned = false;
-                    ChangeEnemyState(EnemyState.Alert);
+                    ChangeEnemyState(EnemyState.Patrolling);
 
                 }
             }
