@@ -48,8 +48,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     internal float timeLastSawPlayer;
     [SerializeField] float searchTimer = 5f;
-    [SerializeField] float awarenessGainPerSecond;
-    [SerializeField] float awarenessLosePerSecond;
+    [SerializeField] float awarenessGainPerSecond = 10f;
+    [SerializeField] float awarenessLosePerSecond = 10f;
 
     [SerializeField] internal float enemyViewAngle = .3f;
 
