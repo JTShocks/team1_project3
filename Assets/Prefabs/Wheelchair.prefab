@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 5004195808419720217}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7482418559454681841
 Rigidbody:
@@ -101,7 +101,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   isPickedUp: 0
   isBeingThrown: 0
-  stunAmount: 2
+  stunAmount: 4
 --- !u!208 &6578711079836325646
 NavMeshObstacle:
   m_ObjectHideFlags: 0
