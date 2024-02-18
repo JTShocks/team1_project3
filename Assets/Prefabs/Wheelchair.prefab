@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8084351115173445118}
   - component: {fileID: 7482418559454681841}
   - component: {fileID: 1430898783321405866}
-  - component: {fileID: 797864289819505267}
+  - component: {fileID: 4279492963290672743}
   - component: {fileID: 6578711079836325646}
   - component: {fileID: 1286214014869982529}
   m_Layer: 6
   m_Name: Wheelchair
-  m_TagString: Grounded
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 5004195808419720217}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7482418559454681841
 Rigidbody:
@@ -81,11 +81,11 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.4835937, z: 1.4}
-  m_Center: {x: 0, y: 0.75820315, z: 0}
---- !u!114 &797864289819505267
+  m_Size: {x: 1, y: 1.6233703, z: 0.38495803}
+  m_Center: {x: 0, y: -0.18426532, z: -0.50752103}
+--- !u!114 &4279492963290672743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,17 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3851197837469110212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77cefe8e39ed0a449d69e5c854dcd51, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b818df73eee9ee47af880da3cab3723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: Press E to grab
+  prompt: Press E to pickup
   rb: {fileID: 0}
   isPickedUp: 0
   isBeingThrown: 0
-  stunAmount: 3
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1
+  stunAmount: 2
 --- !u!208 &6578711079836325646
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -119,7 +116,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: -0.25, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1286214014869982529
 BoxCollider:
@@ -140,8 +137,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0115796, y: 0.7054841, z: 1.4411716}
-  m_Center: {x: -0.0017358674, y: 0.3449134, z: -0.021530507}
+  m_Size: {x: 1.0115796, y: 0.83548295, z: 1.4411716}
+  m_Center: {x: -0.0017358661, y: -0.58690244, z: -0.021530509}
 --- !u!1001 &4825819131140262898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,7 +175,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 09f41566082d59949a11827e6a076466,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09f41566082d59949a11827e6a076466,
         type: 3}
