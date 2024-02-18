@@ -20,7 +20,7 @@ public class Door : MonoBehaviour, IInteractable
     private Vector3 forward;
     private Coroutine animationCouroutine;
 
-    [SerializeField] bool isExitDoor;
+    [SerializeField] internal bool isExitDoor;
 
 
     AudioSource audioSource;
