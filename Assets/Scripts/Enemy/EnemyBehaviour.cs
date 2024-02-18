@@ -100,7 +100,7 @@ public class EnemyBehaviour : MonoBehaviour
             Door door = hit.collider.GetComponent<Door>();
             if(door != null)
             {
-                if(!door.isOpen)
+                if(!door.isOpen && !door.isExitDoor)
                 {
                     door.OpenDoor(transform.position);
                 }
@@ -153,7 +153,7 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             break;
             case EnemyState.Stunned:
-                if(isStunned)
+            if(isStunned)
             {
                 currentMovespeed = 0;
                 stunnedTimer -= Time.deltaTime;
@@ -162,7 +162,6 @@ public class EnemyBehaviour : MonoBehaviour
                     currentMovespeed = baseMoveSpeed;
                     isStunned = false;
                     ChangeEnemyState(EnemyState.Patrolling);
-
                 }
             }
             break;
